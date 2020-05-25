@@ -11,8 +11,8 @@ import com.joshuapocsidio.model.item.GameItem;
  */
 public abstract class WeaponItem extends GameItem
 {
-    protected String damageType;
-    protected String weaponType;
+    private String damageType;
+    private String weaponType;
 
     public WeaponItem(String name, int minEffect, int maxEffect, int cost, String damageType, String weaponType)
     {
