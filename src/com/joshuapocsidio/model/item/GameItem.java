@@ -14,10 +14,10 @@ import java.util.Random;
  */
 public abstract class GameItem
 {
-    protected String name;
-    protected int cost;
-    protected int maxEffect;
-    protected int minEffect;
+    private String name;
+    private int cost;
+    private int maxEffect;
+    private int minEffect;
 
     public GameItem(String name, int minEffect, int maxEffect, int cost)
     {
