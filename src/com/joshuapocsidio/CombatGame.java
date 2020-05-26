@@ -6,7 +6,7 @@ import com.joshuapocsidio.controller.factory.EnemyFactory;
 import com.joshuapocsidio.controller.factory.ItemFactory;
 import com.joshuapocsidio.controller.io.InvalidItemDataSourceException;
 import com.joshuapocsidio.controller.io.ItemDatabaseManager;
-import com.joshuapocsidio.controller.player.PlayerController;
+import com.joshuapocsidio.controller.player.CharacterController;
 import com.joshuapocsidio.controller.shop.ShopController;
 import com.joshuapocsidio.controller.ui.InvalidMenuManagerException;
 import com.joshuapocsidio.controller.ui.MenuManager;
@@ -40,12 +40,12 @@ public class CombatGame
             CharacterPlayer player = new CharacterPlayer(itemDatabase.getCheapestWeapon(), itemDatabase.getCheapestArmour());
 
             /* Create Controllers */
-            PlayerController playerController = new PlayerController(player);
+            CharacterController characterController = new CharacterController(player);
             ShopController shopController = new ShopController(player, enchantmentFactory);
             BattleController battleController = new BattleController(enemyFactory);
 
             /* Initialize menu manager and show UI */
-            MenuManager menuManager = new MenuManager(player, itemDatabase, enchantmentDatabase, playerController, shopController, battleController);
+            MenuManager menuManager = new MenuManager(player, itemDatabase, enchantmentDatabase, characterController, shopController, battleController);
             menuManager.initialiseMenuTree();
             menuManager.showUI();
         }

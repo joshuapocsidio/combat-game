@@ -1,7 +1,7 @@
 package com.joshuapocsidio.view.ui.change;
 
-import com.joshuapocsidio.controller.player.PlayerController;
-import com.joshuapocsidio.controller.player.PlayerControllerException;
+import com.joshuapocsidio.controller.player.CharacterController;
+import com.joshuapocsidio.controller.player.CharacterControllerException;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
 import com.joshuapocsidio.view.menu.MenuItem;
 import com.joshuapocsidio.view.ui.UserInterface;
@@ -18,18 +18,18 @@ public class ChangeNameUI extends MenuItem
 {
     /** ChangeNameUI Fields **/
     private final CharacterPlayer player;
-    private final PlayerController playerController;
+    private final CharacterController characterController;
 
     /**
      * Constructor
      */
-    public ChangeNameUI(CharacterPlayer player, PlayerController playerController)
+    public ChangeNameUI(CharacterPlayer player, CharacterController characterController)
     {
         super();
         this.menuLabel = "Change Character Name";
 
         this.player = player;
-        this.playerController = playerController;
+        this.characterController = characterController;
     }
 
     /**
@@ -75,10 +75,10 @@ public class ChangeNameUI extends MenuItem
     {
         try
         {
-            playerController.setPlayerName(choiceStr);
+            characterController.setPlayerName(choiceStr);
             return true;
         }
-        catch(PlayerControllerException e)
+        catch(CharacterControllerException e)
         {
             System.out.println(e.getMessage() + " - Please try again");
         }

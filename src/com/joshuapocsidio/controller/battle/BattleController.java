@@ -71,7 +71,7 @@ public class BattleController
      * Method that gives character player rewards.
      * Rewards are based on the gold and health of defeated enemy
      */
-    public void givePlayerRewards(CharacterPlayer player, EnemyPlayer enemy)
+    public void givePlayerRewards(CharacterPlayer player, CombatPlayer enemy)
     {
         /* Give gold reward */
         player.setGold(player.getGold() + enemy.getGold());

@@ -1,7 +1,7 @@
 package com.joshuapocsidio.view.ui.change;
 
-import com.joshuapocsidio.controller.player.PlayerController;
-import com.joshuapocsidio.controller.player.PlayerControllerException;
+import com.joshuapocsidio.controller.player.CharacterController;
+import com.joshuapocsidio.controller.player.CharacterControllerException;
 import com.joshuapocsidio.model.item.armour.ArmourItem;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
 import com.joshuapocsidio.view.menu.MenuItem;
@@ -21,18 +21,18 @@ public class ChangeArmourUI extends MenuItem
 {
     /** ChangeArmourUI Fields **/
     private final CharacterPlayer player;
-    private final PlayerController playerController;
+    private final CharacterController characterController;
 
     /**
      * Constructor
      */
-    public ChangeArmourUI(CharacterPlayer player, PlayerController playerController)
+    public ChangeArmourUI(CharacterPlayer player, CharacterController characterController)
     {
         super();
         this.menuLabel = "Change Armour";
 
         this.player = player;
-        this.playerController = playerController;
+        this.characterController = characterController;
     }
 
     /**
@@ -81,10 +81,10 @@ public class ChangeArmourUI extends MenuItem
         try
         {
             // Equip armour obtained from the list of armours
-            playerController.equipArmour(armours.get(Integer.parseInt(choiceStr) - 1));
+            characterController.equipArmour(armours.get(Integer.parseInt(choiceStr) - 1));
             return true;
         }
-        catch(PlayerControllerException e)
+        catch(CharacterControllerException e)
         {
             System.out.println(e.getMessage() + " - Please try again");
         }

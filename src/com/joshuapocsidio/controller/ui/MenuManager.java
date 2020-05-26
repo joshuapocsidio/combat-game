@@ -1,7 +1,7 @@
 package com.joshuapocsidio.controller.ui;
 
 import com.joshuapocsidio.controller.battle.BattleController;
-import com.joshuapocsidio.controller.player.PlayerController;
+import com.joshuapocsidio.controller.player.CharacterController;
 import com.joshuapocsidio.controller.shop.ShopController;
 import com.joshuapocsidio.model.enchantment.EnchantmentDatabase;
 import com.joshuapocsidio.model.item.ItemDatabase;
@@ -41,18 +41,18 @@ public class MenuManager
     private final EnchantmentDatabase enchantmentDatabase;
 
     // Controllers
-    private final PlayerController playerController;
+    private final CharacterController characterController;
     private final ShopController shopController;
     private final BattleController battleController;
 
     public MenuManager(CharacterPlayer player, ItemDatabase itemDatabase, EnchantmentDatabase enchantmentDatabase,
-                       PlayerController playerController, ShopController shopController, BattleController battleController)
+                       CharacterController characterController, ShopController shopController, BattleController battleController)
     {
         this.player = player;
         this.itemDatabase = itemDatabase;
         this.enchantmentDatabase = enchantmentDatabase;
 
-        this.playerController = playerController;
+        this.characterController = characterController;
         this.shopController = shopController;
         this.battleController = battleController;
     }
@@ -81,7 +81,7 @@ public class MenuManager
             errorMessage += "Enchantment database, ";
         }
 
-        if(playerController == null)
+        if(characterController == null)
         {
             errorMessage += "Player controller, ";
         }
@@ -108,9 +108,9 @@ public class MenuManager
         // Create main menu interfaces - First level
         Menu shop = new ShopMenuUI(player, itemDatabase);
         MenuItem battle = new BattleUI(player, battleController);
-        MenuItem nameChange = new ChangeNameUI(player, playerController);
-        MenuItem weaponChange = new ChangeWeaponUI(player, playerController);
-        MenuItem armourChange = new ChangeArmourUI(player, playerController);
+        MenuItem nameChange = new ChangeNameUI(player, characterController);
+        MenuItem weaponChange = new ChangeWeaponUI(player, characterController);
+        MenuItem armourChange = new ChangeArmourUI(player, characterController);
 
         // Add main menu interfaces
         this.root.add(shop);

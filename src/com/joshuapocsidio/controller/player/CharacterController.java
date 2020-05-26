@@ -1,6 +1,5 @@
 package com.joshuapocsidio.controller.player;
 
-import com.joshuapocsidio.model.player.GamePlayerException;
 import com.joshuapocsidio.model.item.armour.ArmourItem;
 import com.joshuapocsidio.model.item.weapon.WeaponItem;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
@@ -11,11 +10,11 @@ import com.joshuapocsidio.model.player.character.CharacterPlayerException;
  * - set player name
  * - equip weapon/armour
  */
-public class PlayerController
+public class CharacterController
 {
     private final CharacterPlayer player;
 
-    public PlayerController(CharacterPlayer player)
+    public CharacterController(CharacterPlayer player)
     {
         if(player == null)
         {
@@ -28,16 +27,16 @@ public class PlayerController
     /**
      * Method to set the player name and checks validity of input name
      */
-    public void setPlayerName(String name) throws PlayerControllerException
+    public void setPlayerName(String name) throws CharacterControllerException
     {
         if(name.isEmpty() || name.isBlank())
         {
-            throw new PlayerControllerException("Player name must not be empty nor blank");
+            throw new CharacterControllerException("Player name must not be empty nor blank");
         }
 
         if(name.length() < 3)
         {
-            throw new PlayerControllerException("Player name must be at least 2 characters");
+            throw new CharacterControllerException("Player name must be at least 2 characters");
         }
 
         // Set the player's name with input string
@@ -49,7 +48,7 @@ public class PlayerController
      * Validity check is done within class to minimise calls required from this
      * controller class to the model class
      */
-    public void equipWeapon(WeaponItem weapon) throws PlayerControllerException
+    public void equipWeapon(WeaponItem weapon) throws CharacterControllerException
     {
         try
         {
@@ -58,7 +57,7 @@ public class PlayerController
         }
         catch (CharacterPlayerException e)
         {
-            throw new PlayerControllerException("Could not equip weapon - " +e.getMessage(), e);
+            throw new CharacterControllerException("Could not equip weapon - " +e.getMessage(), e);
         }
     }
 
@@ -67,7 +66,7 @@ public class PlayerController
      * Validity check is done within class to minimise calls required from this
      * controller class to the model class
      */
-    public void equipArmour(ArmourItem armour) throws PlayerControllerException
+    public void equipArmour(ArmourItem armour) throws CharacterControllerException
     {
         try
         {
@@ -76,7 +75,7 @@ public class PlayerController
         }
         catch(CharacterPlayerException e)
         {
-            throw new PlayerControllerException("Could not equip weapon - " + e.getMessage(), e);
+            throw new CharacterControllerException("Could not equip weapon - " + e.getMessage(), e);
         }
     }
 
