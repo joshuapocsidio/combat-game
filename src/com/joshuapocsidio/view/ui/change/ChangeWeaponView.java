@@ -10,23 +10,23 @@ import com.joshuapocsidio.view.ui.UserInterface;
 import java.util.List;
 
 /**
- * View class for ChangeWeaponUI and extends MenuItem
+ * View class for ChangeWeaponView and extends MenuItem
  *
  * This class is responsible for
  * - showing interface output specific for changing the weapon of character player
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when changing weapon of character player
  */
-public class ChangeWeaponUI extends MenuAction
+public class ChangeWeaponView extends MenuAction
 {
-    /** ChangeArmourUI Fields **/
+    /** ChangeWeaponView Fields **/
     private final CharacterPlayer player;
     private final CharacterController characterController;
 
     /**
      * Constructor
      */
-    public ChangeWeaponUI(CharacterPlayer player, CharacterController characterController)
+    public ChangeWeaponView(CharacterPlayer player, CharacterController characterController)
     {
         super();
         this.menuLabel = "Change Weapon";
