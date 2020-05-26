@@ -5,20 +5,20 @@ import com.joshuapocsidio.model.player.character.GameOverObserver;
 import com.joshuapocsidio.view.menu.MenuDirectory;
 
 /**
- * View class for MainMenuUI and extends Menu
+ * View class for MainMenuDirectory and extends Menu
  *
  * This class is responsible for
  * - showing interface output specific for options at the top level of the game
  */
-public class MainMenuDirectoryUI extends MenuDirectory implements GameOverObserver
+public class MainMenuDirectory extends MenuDirectory implements GameOverObserver
 {
-    /** MainMenuUI Fields **/
+    /** MainMenuDirectory Fields **/
     private final CharacterPlayer characterPlayer;
 
     /**
      * Constructor
      */
-    public MainMenuDirectoryUI(CharacterPlayer characterPlayer)
+    public MainMenuDirectory(CharacterPlayer characterPlayer)
     {
         super();
 

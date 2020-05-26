@@ -9,23 +9,23 @@ import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 /**
- * View class for SellUI and extends MenuItem
+ * View class for SellView and extends MenuItem
  *
  * This class is responsible for
  * - showing interface output specific for when selling items to the shop
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when selling items to the shop
  */
-public class SellUI extends MenuAction
+public class SellView extends MenuAction
 {
-    /** SellUI Fields **/
+    /** SellView Fields **/
     private final CharacterPlayer player;
     private final ShopController shopController;
 
     /**
      * Constructor
      */
-    public SellUI(CharacterPlayer player, ShopController shopController)
+    public SellView(CharacterPlayer player, ShopController shopController)
     {
         super();
         this.menuLabel = "Sell Item(s)";

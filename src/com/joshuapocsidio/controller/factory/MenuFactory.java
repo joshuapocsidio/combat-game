@@ -14,9 +14,9 @@ import com.joshuapocsidio.view.ui.change.ChangeArmourView;
 import com.joshuapocsidio.view.ui.change.ChangeNameView;
 import com.joshuapocsidio.view.ui.change.ChangeWeaponView;
 import com.joshuapocsidio.view.ui.shop.BuyView;
-import com.joshuapocsidio.view.ui.shop.EnchantUI;
-import com.joshuapocsidio.view.ui.shop.SellUI;
-import com.joshuapocsidio.view.ui.shop.ShopMenuDirectoryUI;
+import com.joshuapocsidio.view.ui.shop.EnchantView;
+import com.joshuapocsidio.view.ui.shop.SellView;
+import com.joshuapocsidio.view.ui.shop.ShopMenuDirectory;
 
 /**
  * Class for managing hierarchy of menus.
@@ -103,10 +103,10 @@ public class MenuFactory
         }
 
         // Initialise the root
-        this.root = new MainMenuDirectoryUI(player);
+        this.root = new MainMenuDirectory(player);
 
         // Create main menu interfaces - First level
-        MenuDirectory shop = new ShopMenuDirectoryUI(player, itemDatabase);
+        MenuDirectory shop = new ShopMenuDirectory(player, itemDatabase);
         MenuAction battle = new BattleView(player, battleController);
         MenuAction nameChange = new ChangeNameView(player, characterController);
         MenuAction weaponChange = new ChangeWeaponView(player, characterController);
@@ -121,8 +121,8 @@ public class MenuFactory
 
         // Create Shop interfaces - Second level (shop)
         MenuAction buy = new BuyView(itemDatabase, shopController);
-        MenuAction sell = new SellUI(player, shopController);
-        MenuAction enchant = new EnchantUI(player, enchantmentDatabase, shopController);
+        MenuAction sell = new SellView(player, shopController);
+        MenuAction enchant = new EnchantView(player, enchantmentDatabase, shopController);
 
         // Add Shop interfaces
         shop.add(buy);

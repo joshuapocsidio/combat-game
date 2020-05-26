@@ -12,16 +12,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * View class for EnchantUI and extends MenuItem
+ * View class for EnchantView and extends MenuItem
  *
  * This class is responsible for
  * - showing interface output specific for enchanting a weapon from player's inventory
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when enchanting a weapon from player's inventory
  */
-public class EnchantUI extends MenuAction
+public class EnchantView extends MenuAction
 {
-    /** ChangeArmourUI Fields **/
+    /** EnchantView Fields **/
     private final CharacterPlayer player;
     private final EnchantmentDatabase enchantmentDatabase;
     private final ShopController shopController;
@@ -29,7 +29,7 @@ public class EnchantUI extends MenuAction
     /**
      * Constructor
      */
-    public EnchantUI(CharacterPlayer player, EnchantmentDatabase enchantmentDatabase, ShopController shopController)
+    public EnchantView(CharacterPlayer player, EnchantmentDatabase enchantmentDatabase, ShopController shopController)
     {
         super();
         this.menuLabel = "Enchant Weapon(s)";

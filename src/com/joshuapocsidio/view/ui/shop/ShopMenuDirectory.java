@@ -6,21 +6,21 @@ import com.joshuapocsidio.view.menu.MenuDirectory;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 /**
- * View class for ShopMenuUI and extends Menu
+ * View class for ShopMenuDirectory and extends Menu
  *
  * This class is responsible for
  * - showing interface output specific for options and corresponding interface when inside the shop
  */
-public class ShopMenuDirectoryUI extends MenuDirectory
+public class ShopMenuDirectory extends MenuDirectory
 {
-    /** ShopMenuUI Fields **/
+    /** ShopMenuDirectory Fields **/
     private final CharacterPlayer player;
     private final ItemDatabase itemDatabase;
 
     /**
      * Constructor
      */
-    public ShopMenuDirectoryUI(CharacterPlayer player, ItemDatabase itemDatabase)
+    public ShopMenuDirectory(CharacterPlayer player, ItemDatabase itemDatabase)
     {
         super();
         this.menuLabel = "Go to Shop";
