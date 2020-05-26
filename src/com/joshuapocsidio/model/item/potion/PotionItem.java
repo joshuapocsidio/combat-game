@@ -1,7 +1,6 @@
 package com.joshuapocsidio.model.item.potion;
 
 import com.joshuapocsidio.model.item.GameItem;
-import com.joshuapocsidio.model.player.GamePlayer;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
 
 /**

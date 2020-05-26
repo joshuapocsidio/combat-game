@@ -1,8 +1,8 @@
 package com.joshuapocsidio.model.player.character;
 
-import com.joshuapocsidio.model.player.GamePlayer;
+import com.joshuapocsidio.model.player.CombatPlayer;
 
 public interface PotionUseObserver
 {
-    void showPotionUseEvent(GamePlayer player, String name, int damage);
+    void showPotionUseEvent(CombatPlayer player, String name, int damage);
 }

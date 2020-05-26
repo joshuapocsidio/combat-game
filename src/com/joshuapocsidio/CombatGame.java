@@ -14,7 +14,7 @@ import com.joshuapocsidio.model.enchantment.EnchantmentDatabase;
 import com.joshuapocsidio.model.item.ItemDatabase;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
 
-public class CombatGameApplication
+public class CombatGame
 {
     private static final String DEFAULT_ITEM_DATABASE = "./resources/item_database.txt";
 

@@ -1,13 +1,13 @@
 package com.joshuapocsidio.model.player.enemy;
 
-import com.joshuapocsidio.model.player.GamePlayer;
+import com.joshuapocsidio.model.player.CombatPlayer;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 /**
- * Model class for EnemyPlayer inheriting from GamePlayer abstract class
+ * Model class for EnemyPlayer inheriting from CombatPlayer abstract class
  *
  * FIELDS
  * - minDamage          : int
@@ -16,7 +16,7 @@ import java.util.Random;
  * - maxDefence         : int
  * - specialProbability : int
  */
-public abstract class EnemyPlayer extends GamePlayer
+public abstract class EnemyPlayer extends CombatPlayer
 {
     /** List of observers **/
     private final List<SpecialAbilityObserver> specialAbilityObservers;

@@ -4,12 +4,12 @@ import com.joshuapocsidio.model.item.armour.ArmourItem;
 import com.joshuapocsidio.model.item.GameItem;
 import com.joshuapocsidio.model.item.potion.PotionItem;
 import com.joshuapocsidio.model.item.weapon.WeaponItem;
-import com.joshuapocsidio.model.player.GamePlayer;
+import com.joshuapocsidio.model.player.CombatPlayer;
 
 import java.util.*;
 
 /**
- * Model class for CharacterPlayer inheriting from GamePlayer abstract class
+ * Model class for CharacterPlayer inheriting from CombatPlayer abstract class
  *
  * FIELDS
  * - inventory      : List of GameItem
@@ -20,7 +20,7 @@ import java.util.*;
  * - potionUseObservers : List of PotionUseObserver
  * - gameOverObservers  : List of GameOverObserver
  */
-public class CharacterPlayer extends GamePlayer
+public class CharacterPlayer extends CombatPlayer
 {
 
     /** Character Player specific Fields **/
@@ -128,7 +128,7 @@ public class CharacterPlayer extends GamePlayer
      * RETURN
      * - calculated attack damage : int
      *
-     * NOTE - This method is required by the GamePlayer parent class which holds the method for
+     * NOTE - This method is required by the CombatPlayer parent class which holds the method for
      * the attack functionality. For this subclass, the weapon class strike() method determines
      * the damage calculation.
      */
@@ -144,7 +144,7 @@ public class CharacterPlayer extends GamePlayer
      * RETURN
      * - calculated blocked damage : int
      *
-     * NOTE - This method is required by the GamePlayer parent class which holds the method for
+     * NOTE - This method is required by the CombatPlayer parent class which holds the method for
      * the defend functionality. For this subclass, the weapon class block() method determines
      * the block calculation.
      */

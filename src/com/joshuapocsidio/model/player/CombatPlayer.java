@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Model abstract class for GamePlayer
+ * Model abstract class for CombatPlayer
  *
  * FIELDS
  * - name           : String
@@ -22,9 +22,9 @@ import java.util.List;
  * - calculateAttack()
  * - calculateDefence(int)
  */
-public abstract class GamePlayer
+public abstract class CombatPlayer
 {
-    /** GamePlayer specific Fields **/
+    /** CombatPlayer specific Fields **/
     private String name;
     private int maxHealth;
     private int currentHealth;
@@ -42,10 +42,10 @@ public abstract class GamePlayer
 
     /**
      * CONSTRUCTOR
-     * - Sets up GamePlayer with relevant fields
+     * - Sets up CombatPlayer with relevant fields
      * - Sets up all relevant observers/Observers
      * **/
-    public GamePlayer(String inName, int inMaxHealth, double inGold)
+    public CombatPlayer(String inName, int inMaxHealth, double inGold)
     {
         name = inName;
         maxHealth = inMaxHealth;

@@ -268,7 +268,7 @@ public class BattleUI extends MenuItem implements AttackObserver, DefendObserver
      * - shows output damage before defence calculations
      */
     @Override
-    public void showAttackEvent(GamePlayer player, int damage)
+    public void showAttackEvent(CombatPlayer player, int damage)
     {
         System.out.println();
         System.out.println("-------- BATTLE ANNOUNCER --------");
@@ -284,7 +284,7 @@ public class BattleUI extends MenuItem implements AttackObserver, DefendObserver
      * - shows if the player who defended did not take any damage
      */
     @Override
-    public void showDefendEvent(GamePlayer player, int blocked, int damageTaken)
+    public void showDefendEvent(CombatPlayer player, int blocked, int damageTaken)
     {
         System.out.println();
         System.out.println("-------- BATTLE ANNOUNCER --------");
@@ -311,7 +311,7 @@ public class BattleUI extends MenuItem implements AttackObserver, DefendObserver
      * - shows output damage before defence calculations (if any)
      */
     @Override
-    public void showPotionUseEvent(GamePlayer player, String name, int damage)
+    public void showPotionUseEvent(CombatPlayer player, String name, int damage)
     {
         System.out.println();
         System.out.println("-------- BATTLE ANNOUNCER --------");
@@ -331,7 +331,7 @@ public class BattleUI extends MenuItem implements AttackObserver, DefendObserver
      * - shows amount of life points healed
      */
     @Override
-    public void showHealEvent(GamePlayer player, int healed)
+    public void showHealEvent(CombatPlayer player, int healed)
     {
         System.out.println();
         System.out.println(player.getName() + " healed for " + healed + " life points!!");
@@ -346,7 +346,7 @@ public class BattleUI extends MenuItem implements AttackObserver, DefendObserver
      * the rewards from winning the battle (if applicable)
      */
     @Override
-    public void showBattleEnd(GamePlayer deadPlayer)
+    public void showBattleEnd(CombatPlayer deadPlayer)
     {
         System.out.println();
         System.out.println("- - - - POST-BATTLE RESULTS - - - -");

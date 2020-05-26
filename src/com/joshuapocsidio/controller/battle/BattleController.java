@@ -2,9 +2,8 @@ package com.joshuapocsidio.controller.battle;
 
 import com.joshuapocsidio.controller.factory.EnemyFactory;
 import com.joshuapocsidio.model.item.potion.PotionItem;
-import com.joshuapocsidio.model.player.GamePlayer;
+import com.joshuapocsidio.model.player.CombatPlayer;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
-import com.joshuapocsidio.model.player.character.CharacterPlayerException;
 import com.joshuapocsidio.model.player.enemy.EnemyPlayer;
 
 /**
@@ -32,7 +31,7 @@ public class BattleController
      * Method that facilitates the fighting between players.
      * Player 1 always attacks and Player 2 defends
      */
-    public void fight(GamePlayer p1, GamePlayer p2)
+    public void fight(CombatPlayer p1, CombatPlayer p2)
     {
         p2.defend(p1.attack());
     }
@@ -45,7 +44,7 @@ public class BattleController
      * NOTE - potion use does not throw exceptions since potion objects are created
      * using item factory with relevant constraints to prevent damage being negative.
      */
-    public void usePotion(CharacterPlayer p1, GamePlayer p2, PotionItem potion)
+    public void usePotion(CharacterPlayer p1, CombatPlayer p2, PotionItem potion)
     {
         int damage = p1.usePotion(potion);
 
