@@ -1,6 +1,7 @@
 package com.joshuapocsidio.view.ui;
 
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
+import com.joshuapocsidio.model.player.character.GameOverListener;
 import com.joshuapocsidio.view.menu.Menu;
 
 /**

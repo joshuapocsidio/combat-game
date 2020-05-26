@@ -5,8 +5,6 @@ import com.joshuapocsidio.model.item.GameItem;
 import com.joshuapocsidio.model.item.potion.PotionItem;
 import com.joshuapocsidio.model.item.weapon.WeaponItem;
 import com.joshuapocsidio.model.player.GamePlayer;
-import com.joshuapocsidio.view.ui.GameOverListener;
-import com.joshuapocsidio.view.ui.battle.PotionUseListener;
 
 import java.util.*;
 

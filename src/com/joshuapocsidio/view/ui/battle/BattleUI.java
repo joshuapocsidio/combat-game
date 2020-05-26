@@ -2,9 +2,11 @@ package com.joshuapocsidio.view.ui.battle;
 
 import com.joshuapocsidio.controller.battle.BattleController;
 import com.joshuapocsidio.model.item.potion.PotionItem;
-import com.joshuapocsidio.model.player.GamePlayer;
+import com.joshuapocsidio.model.player.*;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
+import com.joshuapocsidio.model.player.character.PotionUseListener;
 import com.joshuapocsidio.model.player.enemy.EnemyPlayer;
+import com.joshuapocsidio.model.player.enemy.SpecialAbilityListener;
 import com.joshuapocsidio.view.menu.MenuItem;
 import com.joshuapocsidio.view.ui.UserInterface;
 

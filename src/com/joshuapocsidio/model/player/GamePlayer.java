@@ -1,11 +1,5 @@
 package com.joshuapocsidio.model.player;
 
-import com.joshuapocsidio.controller.player.PlayerControllerException;
-import com.joshuapocsidio.view.ui.battle.AttackListener;
-import com.joshuapocsidio.view.ui.battle.DefendListener;
-import com.joshuapocsidio.view.ui.battle.HealListener;
-import com.joshuapocsidio.view.ui.battle.BattleOverListener;
-
 import java.util.LinkedList;
 import java.util.List;
 

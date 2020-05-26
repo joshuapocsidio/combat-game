@@ -1,4 +1,4 @@
-package com.joshuapocsidio.view.ui;
+package com.joshuapocsidio.model.player.character;
 
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
 

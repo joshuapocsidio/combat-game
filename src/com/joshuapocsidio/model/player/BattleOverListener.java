@@ -1,4 +1,4 @@
-package com.joshuapocsidio.view.ui.battle;
+package com.joshuapocsidio.model.player;
 
 import com.joshuapocsidio.model.player.GamePlayer;
 

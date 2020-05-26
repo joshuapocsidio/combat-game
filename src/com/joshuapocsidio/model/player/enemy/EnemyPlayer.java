@@ -1,7 +1,6 @@
 package com.joshuapocsidio.model.player.enemy;
 
 import com.joshuapocsidio.model.player.GamePlayer;
-import com.joshuapocsidio.view.ui.battle.SpecialAbilityListener;
 
 import java.util.LinkedList;
 import java.util.List;
