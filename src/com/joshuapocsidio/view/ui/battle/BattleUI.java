@@ -22,7 +22,7 @@ import java.util.Scanner;
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input in between the turns of a battle
  */
-public class BattleUI extends MenuItem implements AttackObserver, DefendObserver, PotionUseObserver, HealObserver, BattleOverObserver, SpecialAbilityObserver
+public class BattleUI extends MenuItem implements AttackObserver, DefendObserver, PotionUseObserver, HealObserver, BattleEndObserver, SpecialAbilityObserver
 {
     /** BattleUI Fields **/
     private final CharacterPlayer characterPlayer;
@@ -346,7 +346,7 @@ public class BattleUI extends MenuItem implements AttackObserver, DefendObserver
      * the rewards from winning the battle (if applicable)
      */
     @Override
-    public void endBattle(GamePlayer deadPlayer)
+    public void showBattleEnd(GamePlayer deadPlayer)
     {
         System.out.println();
         System.out.println("- - - - POST-BATTLE RESULTS - - - -");

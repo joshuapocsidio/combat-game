@@ -34,7 +34,7 @@ public abstract class GamePlayer
     private List<AttackObserver> attackObservers;
     private List<DefendObserver> defendObservers;
     private List<HealObserver> healObservers;
-    private List<BattleOverObserver> battleOverObservers;
+    private List<BattleEndObserver> battleEndObservers;
 
     /** Template method hooks for attack and defend value calculations */
     protected abstract int calculateAttack();
@@ -56,7 +56,7 @@ public abstract class GamePlayer
         attackObservers = new LinkedList<>();
         defendObservers = new LinkedList<>();
         healObservers = new LinkedList<>();
-        battleOverObservers = new LinkedList<>();
+        battleEndObservers = new LinkedList<>();
     }
 
     /**
@@ -252,21 +252,21 @@ public abstract class GamePlayer
     /**
      * Methods for adding, removing, and notifying BattleOverObservers
      */
-    public void addBattleOverObserver(BattleOverObserver battleOverObserver)
+    public void addBattleOverObserver(BattleEndObserver battleEndObserver)
     {
-        battleOverObservers.add(battleOverObserver);
+        battleEndObservers.add(battleEndObserver);
     }
 
-    public void removeBattleOverObserver(BattleOverObserver battleOverObserver)
+    public void removeBattleOverObserver(BattleEndObserver battleEndObserver)
     {
-        battleOverObservers.remove(battleOverObserver);
+        battleEndObservers.remove(battleEndObserver);
     }
 
     public void notifyBattleOverObservers()
     {
-        for(BattleOverObserver battleOverObserver : battleOverObservers)
+        for(BattleEndObserver battleEndObserver : battleEndObservers)
         {
-            battleOverObserver.endBattle(this);
+            battleEndObserver.showBattleEnd(this);
         }
     }
 }

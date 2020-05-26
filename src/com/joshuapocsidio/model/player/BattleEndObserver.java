@@ -2,7 +2,7 @@ package com.joshuapocsidio.model.player;
 
 import com.joshuapocsidio.model.player.GamePlayer;
 
-public interface BattleOverObserver
+public interface BattleEndObserver
 {
-    void endBattle(GamePlayer player);
+    void showBattleEnd(GamePlayer player);
 }
