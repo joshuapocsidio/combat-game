@@ -15,16 +15,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * View class for BattleUI and extends MenuItem
+ * View class for BattleView and extends MenuItem
  *
  * This class is responsible for
  * - showing interface output specific for the battle mechanism of the game
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input in between the turns of a battle
  */
-public class BattleUI extends MenuAction implements AttackObserver, DefendObserver, PotionUseObserver, HealObserver, BattleEndObserver, SpecialAbilityObserver
+public class BattleView extends MenuAction implements AttackObserver, DefendObserver, PotionUseObserver, HealObserver, BattleEndObserver, SpecialAbilityObserver
 {
-    /** BattleUI Fields **/
+    /** BattleView Fields **/
     private final CharacterPlayer characterPlayer;
     private final BattleController battleController;
 
@@ -34,7 +34,7 @@ public class BattleUI extends MenuAction implements AttackObserver, DefendObserv
     /**
      * Constructor
      */
-    public BattleUI(CharacterPlayer characterPlayer, BattleController battleController)
+    public BattleView(CharacterPlayer characterPlayer, BattleController battleController)
     {
         super();
         this.menuLabel = "Start Battle";

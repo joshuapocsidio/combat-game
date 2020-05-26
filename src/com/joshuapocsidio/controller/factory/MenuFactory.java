@@ -9,7 +9,7 @@ import com.joshuapocsidio.model.player.character.CharacterPlayer;
 import com.joshuapocsidio.view.menu.MenuDirectory;
 import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.*;
-import com.joshuapocsidio.view.ui.battle.BattleUI;
+import com.joshuapocsidio.view.ui.battle.BattleView;
 import com.joshuapocsidio.view.ui.change.ChangeArmourUI;
 import com.joshuapocsidio.view.ui.change.ChangeNameUI;
 import com.joshuapocsidio.view.ui.change.ChangeWeaponUI;
@@ -107,7 +107,7 @@ public class MenuFactory
 
         // Create main menu interfaces - First level
         MenuDirectory shop = new ShopMenuDirectoryUI(player, itemDatabase);
-        MenuAction battle = new BattleUI(player, battleController);
+        MenuAction battle = new BattleView(player, battleController);
         MenuAction nameChange = new ChangeNameUI(player, characterController);
         MenuAction weaponChange = new ChangeWeaponUI(player, characterController);
         MenuAction armourChange = new ChangeArmourUI(player, characterController);
