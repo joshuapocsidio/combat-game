@@ -9,23 +9,23 @@ import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 /**
- * View class for BuyUI and extends MenuItem
+ * View class for BuyView and extends MenuItem
  *
  * This class is responsible for
  * - showing interface output specific for when buying items from the shop
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when buying items from the shop
  */
-public class BuyUI extends MenuAction
+public class BuyView extends MenuAction
 {
-    /** BuyUI Fields **/
+    /** BuyView Fields **/
     private final ItemDatabase itemDatabase;
     private final ShopController shopController;
 
     /**
      * Constructor
      */
-    public BuyUI(ItemDatabase itemDatabase, ShopController shopController)
+    public BuyView(ItemDatabase itemDatabase, ShopController shopController)
     {
         super();
         this.menuLabel = "Buy Item(s)";

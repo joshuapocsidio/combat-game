@@ -13,7 +13,7 @@ import com.joshuapocsidio.view.ui.battle.BattleView;
 import com.joshuapocsidio.view.ui.change.ChangeArmourView;
 import com.joshuapocsidio.view.ui.change.ChangeNameView;
 import com.joshuapocsidio.view.ui.change.ChangeWeaponView;
-import com.joshuapocsidio.view.ui.shop.BuyUI;
+import com.joshuapocsidio.view.ui.shop.BuyView;
 import com.joshuapocsidio.view.ui.shop.EnchantUI;
 import com.joshuapocsidio.view.ui.shop.SellUI;
 import com.joshuapocsidio.view.ui.shop.ShopMenuDirectoryUI;
@@ -120,7 +120,7 @@ public class MenuFactory
         this.root.add(battle);
 
         // Create Shop interfaces - Second level (shop)
-        MenuAction buy = new BuyUI(itemDatabase, shopController);
+        MenuAction buy = new BuyView(itemDatabase, shopController);
         MenuAction sell = new SellUI(player, shopController);
         MenuAction enchant = new EnchantUI(player, enchantmentDatabase, shopController);
 
