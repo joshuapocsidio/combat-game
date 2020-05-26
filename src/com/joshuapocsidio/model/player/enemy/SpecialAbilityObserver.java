@@ -2,7 +2,7 @@ package com.joshuapocsidio.model.player.enemy;
 
 import com.joshuapocsidio.model.player.enemy.EnemyPlayer;
 
-public interface SpecialAbilityListener
+public interface SpecialAbilityObserver
 {
     void showSpecialAbilityEvent(EnemyPlayer enemy, String description);
 }

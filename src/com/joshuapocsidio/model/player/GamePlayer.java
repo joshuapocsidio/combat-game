@@ -12,11 +12,11 @@ import java.util.List;
  * - currentHealth  : int
  * - gold           : double
  *
- * LISTENERS/OBSERVERS
- * - attackListeners        : List of AttackListener
- * - defendListeners        : List of DefendListener
- * - healListeners          : List of HealListener
- * - battleOverListeners    : List of BattleOverListener
+ * ObserverS/OBSERVERS
+ * - attackObservers        : List of AttackObserver
+ * - defendObservers        : List of DefendObserver
+ * - healObservers          : List of HealObserver
+ * - battleOverObservers    : List of BattleOverObserver
  *
  * TEMPLATE METHOD HOOKS
  * - calculateAttack()
@@ -31,10 +31,10 @@ public abstract class GamePlayer
     private double gold;
 
     /** List of observers **/
-    private List<AttackListener> attackListeners;
-    private List<DefendListener> defendListeners;
-    private List<HealListener> healListeners;
-    private List<BattleOverListener> battleOverListeners;
+    private List<AttackObserver> attackObservers;
+    private List<DefendObserver> defendObservers;
+    private List<HealObserver> healObservers;
+    private List<BattleOverObserver> battleOverObservers;
 
     /** Template method hooks for attack and defend value calculations */
     protected abstract int calculateAttack();
@@ -43,7 +43,7 @@ public abstract class GamePlayer
     /**
      * CONSTRUCTOR
      * - Sets up GamePlayer with relevant fields
-     * - Sets up all relevant observers/listeners
+     * - Sets up all relevant observers/Observers
      * **/
     public GamePlayer(String inName, int inMaxHealth, double inGold)
     {
@@ -53,16 +53,16 @@ public abstract class GamePlayer
 
         currentHealth = maxHealth;
 
-        attackListeners = new LinkedList<>();
-        defendListeners = new LinkedList<>();
-        healListeners = new LinkedList<>();
-        battleOverListeners = new LinkedList<>();
+        attackObservers = new LinkedList<>();
+        defendObservers = new LinkedList<>();
+        healObservers = new LinkedList<>();
+        battleOverObservers = new LinkedList<>();
     }
 
     /**
      * Method for attack functionality
      * - calculates attack from inheriting subclasses
-     * - notifies attack listeners of attack event
+     * - notifies attack Observers of attack event
      *
      * NOTE - This method uses the template method hook which will be implemented
      * by inheriting subclasses.
@@ -72,22 +72,22 @@ public abstract class GamePlayer
         // Calculate attack damage
         int damage = this.calculateAttack();
 
-        // Notify attack listeners
-        notifyAttackListeners(damage);
+        // Notify attack Observers
+        notifyAttackObservers(damage);
         return damage;
     }
 
     /**
      * Method for defend functionality
      * - calculates defend from inheriting subclasses
-     * - notifies defend listeners of defend event
+     * - notifies defend Observers of defend event
      *
      * NOTE - This method uses the template method hook which will be implemented
      * by inheriting subclasses.
      *
      * NOTE - Blocked damage is implemented so that you can only block what is received.
      * That is so that when the calculated blocked is greater than the actual incoming
-     * damage, listeners should only be notified how much damage was blocked, not how much
+     * damage, Observers should only be notified how much damage was blocked, not how much
      * that player could have blocked in that instance.
      * **/
     public void defend(int damage)
@@ -102,8 +102,8 @@ public abstract class GamePlayer
         int finalDamage = damage - blocked;
         finalDamage = Math.max(finalDamage, 0);
 
-        // Notify listeners for defend event
-        this.notifyDefendListeners(blocked, finalDamage);
+        // Notify Observers for defend event
+        this.notifyDefendObservers(blocked, finalDamage);
 
         // Update the health of this player
         this.setHealth(this.getHealth() - finalDamage);
@@ -143,8 +143,8 @@ public abstract class GamePlayer
             // The difference is the amount healed
             int healed = health - this.currentHealth;
 
-            // Notify listeners of heal event
-            notifyHealListeners(healed);
+            // Notify Observers of heal event
+            notifyHealObservers(healed);
         }
 
         // If health is zero or negative
@@ -153,8 +153,8 @@ public abstract class GamePlayer
             // Set current health to 0 - health cannot be negative
             this.currentHealth = 0;
 
-            // Notify listeners that battle is over
-            notifyBattleOverListeners();
+            // Notify Observers that battle is over
+            notifyBattleOverObservers();
         }
         else
         {
@@ -187,86 +187,86 @@ public abstract class GamePlayer
     }
 
     /**
-     * Methods for adding, removing, and notifying AttackListeners
+     * Methods for adding, removing, and notifying AttackObservers
      */
-    public void addAttackListener(AttackListener attackListener)
+    public void addAttackObserver(AttackObserver attackObserver)
     {
-        attackListeners.add(attackListener);
+        attackObservers.add(attackObserver);
     }
 
-    public void removeAttackListener(AttackListener attackListener)
+    public void removeAttackObserver(AttackObserver attackObserver)
     {
-        attackListeners.remove(attackListener);
+        attackObservers.remove(attackObserver);
     }
 
-    public void notifyAttackListeners(int damage)
+    public void notifyAttackObservers(int damage)
     {
-        for(AttackListener listener : attackListeners)
+        for(AttackObserver Observer : attackObservers)
         {
-            listener.showAttackEvent(this, damage);
+            Observer.showAttackEvent(this, damage);
         }
     }
 
     /**
-     * Methods for adding, removing, and notifying DefendListeners
+     * Methods for adding, removing, and notifying DefendObservers
      */
-    public void addDefendListener(DefendListener defendListener)
+    public void addDefendObserver(DefendObserver defendObserver)
     {
-        defendListeners.add(defendListener);
+        defendObservers.add(defendObserver);
     }
 
-    public void removeDefendListener(DefendListener defendListener)
+    public void removeDefendObserver(DefendObserver defendObserver)
     {
-        defendListeners.remove(defendListener);
+        defendObservers.remove(defendObserver);
     }
 
-    public void notifyDefendListeners(int blocked, int damageTaken)
+    public void notifyDefendObservers(int blocked, int damageTaken)
     {
-        for(DefendListener listener : defendListeners)
+        for(DefendObserver Observer : defendObservers)
         {
-            listener.showDefendEvent(this, blocked, damageTaken);
+            Observer.showDefendEvent(this, blocked, damageTaken);
         }
     }
 
     /**
-     * Methods for adding, removing, and notifying HealListeners
+     * Methods for adding, removing, and notifying HealObservers
      */
-    public void addHealListener(HealListener healListener)
+    public void addHealObserver(HealObserver healObserver)
     {
-        healListeners.add(healListener);
+        healObservers.add(healObserver);
     }
 
-    public void removeHealListener(HealListener healListener)
+    public void removeHealObserver(HealObserver healObserver)
     {
-        healListeners.remove(healListener);
+        healObservers.remove(healObserver);
     }
 
-    public void notifyHealListeners(int healed)
+    public void notifyHealObservers(int healed)
     {
-        for(HealListener healListener : healListeners)
+        for(HealObserver healObserver : healObservers)
         {
-            healListener.showHealEvent(this, healed);
+            healObserver.showHealEvent(this, healed);
         }
     }
 
     /**
-     * Methods for adding, removing, and notifying BattleOverListeners
+     * Methods for adding, removing, and notifying BattleOverObservers
      */
-    public void addBattleOverListener(BattleOverListener battleOverListener)
+    public void addBattleOverObserver(BattleOverObserver battleOverObserver)
     {
-        battleOverListeners.add(battleOverListener);
+        battleOverObservers.add(battleOverObserver);
     }
 
-    public void removeBattleOverListener(BattleOverListener battleOverListener)
+    public void removeBattleOverObserver(BattleOverObserver battleOverObserver)
     {
-        battleOverListeners.remove(battleOverListener);
+        battleOverObservers.remove(battleOverObserver);
     }
 
-    public void notifyBattleOverListeners()
+    public void notifyBattleOverObservers()
     {
-        for(BattleOverListener battleOverListener : battleOverListeners)
+        for(BattleOverObserver battleOverObserver : battleOverObservers)
         {
-            battleOverListener.endBattle(this);
+            battleOverObserver.endBattle(this);
         }
     }
 }

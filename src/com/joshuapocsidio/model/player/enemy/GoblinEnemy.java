@@ -26,15 +26,15 @@ public class GoblinEnemy extends EnemyPlayer
     /**
      * Template method hook for Goblin specific special abilities
      * - adds 3 flat damage on top of goblin's attack damage
-     * - notifies SpecialAbilityListeners
+     * - notifies SpecialAbilityObservers
      *
      * RETURN
      * - damage     : int
      * */
     protected int doSpecialAbility(int currentDamage)
     {
-        // Notifies listeners of special ability event
-        this.notifySpecialAbilityListeners("Damage +3!");
+        // Notifies Observers of special ability event
+        this.notifySpecialAbilityObservers("Damage +3!");
 
         // Adds 3 to damage
         return currentDamage + 3;

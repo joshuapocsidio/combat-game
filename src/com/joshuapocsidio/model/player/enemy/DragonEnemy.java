@@ -42,16 +42,16 @@ public class DragonEnemy extends EnemyPlayer
 
         if(num <= 25) // If generated number is 1 to 25
         {
-            // Notify listener of special ability event
-            this.notifySpecialAbilityListeners("Double damage!");
+            // Notify Observer of special ability event
+            this.notifySpecialAbilityObservers("Double damage!");
 
             // Current Damage multiplied by 2
             currentDamage = currentDamage * 2;
         }
         else // If generated number is 26 - 35
         {
-            // Notify listener of special ability event
-            this.notifySpecialAbilityListeners("Lifesteal +10 HP! ");
+            // Notify Observer of special ability event
+            this.notifySpecialAbilityObservers("Lifesteal +10 HP! ");
 
             // Dragon heals by 10
             this.setHealth(this.getHealth() + 10);

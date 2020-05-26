@@ -16,9 +16,9 @@ import java.util.*;
  * - equippedWeapon : WeaponItem
  * - equippedArmour : ArmourItem
  *
- * LISTENERS/OBSERVERS
- * - potionUseListeners : List of PotionUseListener
- * - gameOverListeners  : List of GameOverListener
+ * ObserverS/OBSERVERS
+ * - potionUseObservers : List of PotionUseObserver
+ * - gameOverObservers  : List of GameOverObserver
  */
 public class CharacterPlayer extends GamePlayer
 {
@@ -31,8 +31,8 @@ public class CharacterPlayer extends GamePlayer
     private int equippedWeaponIndex;
     private int equippedArmourIndex;
     /** List of observers **/
-    private List<PotionUseListener> potionUseListeners;
-    private List<GameOverListener> gameOverListeners;
+    private List<PotionUseObserver> potionUseObservers;
+    private List<GameOverObserver> gameOverObservers;
 
     /**
      * DEFAULT CONSTRUCTOR
@@ -50,8 +50,8 @@ public class CharacterPlayer extends GamePlayer
         equippedWeapon = null;
         equippedArmour = null;
 
-        potionUseListeners = new LinkedList<>();
-        gameOverListeners = new LinkedList<>();
+        potionUseObservers = new LinkedList<>();
+        gameOverObservers = new LinkedList<>();
     }
 
     /**
@@ -90,8 +90,8 @@ public class CharacterPlayer extends GamePlayer
         equippedArmour = armour;
         equippedArmourIndex = 1;
 
-        potionUseListeners = new LinkedList<>();
-        gameOverListeners = new LinkedList<>();
+        potionUseObservers = new LinkedList<>();
+        gameOverObservers = new LinkedList<>();
     }
 
     /**
@@ -118,8 +118,8 @@ public class CharacterPlayer extends GamePlayer
         equippedArmour = inEquippedArmour;
         equippedArmourIndex = 1;
 
-        potionUseListeners = new LinkedList<>();
-        gameOverListeners = new LinkedList<>();
+        potionUseObservers = new LinkedList<>();
+        gameOverObservers = new LinkedList<>();
     }
 
     /**
@@ -158,7 +158,7 @@ public class CharacterPlayer extends GamePlayer
      * Method for setting health of player subclass
      *
      * NOTE - This method is overridden but still calls the parent class setHealth(int).
-     * This is implemented since GameOverListeners are only concerned with the death of
+     * This is implemented since GameOverObservers are only concerned with the death of
      * the character player. Game only ends when main character dies.
      */
     @Override
@@ -168,7 +168,7 @@ public class CharacterPlayer extends GamePlayer
 
         if(this.getHealth() == 0)
         {
-            notifyGameOverListeners();
+            notifyGameOverObservers();
         }
     }
 
@@ -176,7 +176,7 @@ public class CharacterPlayer extends GamePlayer
      * Method for potion use functionality
      * - checks if item matches any item in inventory
      * - consumes that potion and then removes from inventory
-     * - notifies listeners of potion use event
+     * - notifies Observers of potion use event
      *
      * RETURN
      * - damage effect : int
@@ -195,7 +195,7 @@ public class CharacterPlayer extends GamePlayer
                 effect = potion.use(this);
                 inventory.remove(item);
 
-                notifyPotionUseListeners(potion.getName(), effect);
+                notifyPotionUseObservers(potion.getName(), effect);
                 return effect;
             }
         }
@@ -511,46 +511,46 @@ public class CharacterPlayer extends GamePlayer
     }
 
     /**
-     * Methods for adding, removing, and notifying PotionUseListeners
+     * Methods for adding, removing, and notifying PotionUseObservers
      */
-    public void addPotionUseListener(PotionUseListener potionUseListener)
+    public void addPotionUseObserver(PotionUseObserver potionUseObserver)
     {
-        potionUseListeners.add(potionUseListener);
+        potionUseObservers.add(potionUseObserver);
     }
 
-    public void removePotionUseListener(PotionUseListener potionUseListener)
+    public void removePotionUseObserver(PotionUseObserver potionUseObserver)
     {
-        potionUseListeners.remove(potionUseListener);
+        potionUseObservers.remove(potionUseObserver);
         // TODO : Throw exception if battle obs does not exist
     }
 
-    public void notifyPotionUseListeners(String name, int damage)
+    public void notifyPotionUseObservers(String name, int damage)
     {
-        for(PotionUseListener potionUseListener : potionUseListeners)
+        for(PotionUseObserver potionUseObserver : potionUseObservers)
         {
-            potionUseListener.showPotionUseEvent(this, name, damage);
+            potionUseObserver.showPotionUseEvent(this, name, damage);
         }
     }
 
     /**
-     * Methods for adding, removing, and notifying GameOverListeners
+     * Methods for adding, removing, and notifying GameOverObservers
      */
-    public void addGameOverListener(GameOverListener gameOverListener)
+    public void addGameOverObserver(GameOverObserver gameOverObserver)
     {
-        gameOverListeners.add(gameOverListener);
+        gameOverObservers.add(gameOverObserver);
     }
 
-    public void removeGameOverListener(GameOverListener gameOverListener)
+    public void removeGameOverObserver(GameOverObserver gameOverObserver)
     {
-        gameOverListeners.remove(gameOverListener);
+        gameOverObservers.remove(gameOverObserver);
         // TODO : Throw exception if battle obs does not exist
     }
 
-    public void notifyGameOverListeners()
+    public void notifyGameOverObservers()
     {
-        for(GameOverListener gameOverListener : gameOverListeners)
+        for(GameOverObserver gameOverObserver : gameOverObservers)
         {
-            gameOverListener.endGame();
+            gameOverObserver.endGame();
         }
     }
 }

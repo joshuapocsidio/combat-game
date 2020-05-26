@@ -19,7 +19,7 @@ import java.util.Random;
 public abstract class EnemyPlayer extends GamePlayer
 {
     /** List of observers **/
-    private final List<SpecialAbilityListener> specialAbilityListeners;
+    private final List<SpecialAbilityObserver> specialAbilityObservers;
 
     /** Enemy Player specific Fields **/
     private int minDamage;
@@ -47,7 +47,7 @@ public abstract class EnemyPlayer extends GamePlayer
         maxDefence = inMaxDefense;
         specialProbability = inSpecialProbability;
 
-        specialAbilityListeners = new LinkedList<>();
+        specialAbilityObservers = new LinkedList<>();
     }
 
     /**
@@ -150,24 +150,24 @@ public abstract class EnemyPlayer extends GamePlayer
     }
 
     /**
-     * Methods for adding, removing, and notifying SpecialAbilityListeners
+     * Methods for adding, removing, and notifying SpecialAbilityObservers
      */
-    public void addSpecialAbilityListener(SpecialAbilityListener specialAbilityListener)
+    public void addSpecialAbilityObserver(SpecialAbilityObserver specialAbilityObserver)
     {
-        specialAbilityListeners.add(specialAbilityListener);
+        specialAbilityObservers.add(specialAbilityObserver);
     }
 
-    public void removeSpecialAbilityListener(SpecialAbilityListener specialAbilityListener)
+    public void removeSpecialAbilityObserver(SpecialAbilityObserver specialAbilityObserver)
     {
-        specialAbilityListeners.remove(specialAbilityListener);
+        specialAbilityObservers.remove(specialAbilityObserver);
         // TODO : Throw exception if battle obs does not exist
     }
 
-    public void notifySpecialAbilityListeners(String description)
+    public void notifySpecialAbilityObservers(String description)
     {
-        for(SpecialAbilityListener listener : specialAbilityListeners)
+        for(SpecialAbilityObserver Observer : specialAbilityObservers)
         {
-            listener.showSpecialAbilityEvent(this, description);
+            Observer.showSpecialAbilityEvent(this, description);
         }
     }
 

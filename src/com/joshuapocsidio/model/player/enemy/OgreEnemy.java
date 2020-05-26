@@ -33,8 +33,8 @@ public class OgreEnemy extends EnemyPlayer
      * */
     protected int doSpecialAbility(int currentDamage)
     {
-        // Notify listeners of special ability event
-        this.notifySpecialAbilityListeners("Double Strike!");
+        // Notify Observers of special ability event
+        this.notifySpecialAbilityObservers("Double Strike!");
 
         // Set the special ability to zero to prevent another special ability on the second strike (eg. triple/quad strike)
         this.setSpecialProbability(0);

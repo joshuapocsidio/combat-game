@@ -4,9 +4,9 @@ import com.joshuapocsidio.controller.battle.BattleController;
 import com.joshuapocsidio.model.item.potion.PotionItem;
 import com.joshuapocsidio.model.player.*;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
-import com.joshuapocsidio.model.player.character.PotionUseListener;
+import com.joshuapocsidio.model.player.character.PotionUseObserver;
 import com.joshuapocsidio.model.player.enemy.EnemyPlayer;
-import com.joshuapocsidio.model.player.enemy.SpecialAbilityListener;
+import com.joshuapocsidio.model.player.enemy.SpecialAbilityObserver;
 import com.joshuapocsidio.view.menu.MenuItem;
 import com.joshuapocsidio.view.ui.UserInterface;
 
@@ -22,7 +22,7 @@ import java.util.Scanner;
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input in between the turns of a battle
  */
-public class BattleUI extends MenuItem implements AttackListener, DefendListener, PotionUseListener, HealListener, BattleOverListener, SpecialAbilityListener
+public class BattleUI extends MenuItem implements AttackObserver, DefendObserver, PotionUseObserver, HealObserver, BattleOverObserver, SpecialAbilityObserver
 {
     /** BattleUI Fields **/
     private final CharacterPlayer characterPlayer;
@@ -47,7 +47,7 @@ public class BattleUI extends MenuItem implements AttackListener, DefendListener
      * Method is overridden so that whenever the parent class called to show ui:
      * - spawn a random enemy
      * - battleOver flag is reset to false
-     * - initialise listeners
+     * - initialise Observers
      */
     @Override
     public void show()
@@ -58,8 +58,8 @@ public class BattleUI extends MenuItem implements AttackListener, DefendListener
         // Reset battle over flag
         battleOver = false;
 
-        // Initialise listeners
-        this.initialiseListeners();
+        // Initialise Observers
+        this.initialiseObservers();
 
         // Show ui as usual
         super.show();
@@ -217,28 +217,28 @@ public class BattleUI extends MenuItem implements AttackListener, DefendListener
     }
 
     /**
-     * Method to initialise this as listener for following:
-     * - attack listener for attack events for both character and enemy players
-     * - defend listener for defend events for both character and enemy players
-     * - potion use listener for potion use events for character players
-     * - heal listener for heal events for character players
-     * - battle over listener for when the battle is over (when a player loses)
-     * - special ability listener for when an enemy's special ability triggers
+     * Method to initialise this as Observer for following:
+     * - attack Observer for attack events for both character and enemy players
+     * - defend Observer for defend events for both character and enemy players
+     * - potion use Observer for potion use events for character players
+     * - heal Observer for heal events for character players
+     * - battle over Observer for when the battle is over (when a player loses)
+     * - special ability Observer for when an enemy's special ability triggers
      */
-    private void initialiseListeners()
+    private void initialiseObservers()
     {
-        // Add itself as listener for attack, defend, and use potion events to player
-        characterPlayer.addAttackListener(this);
-        characterPlayer.addDefendListener(this);
-        characterPlayer.addPotionUseListener(this);
-        characterPlayer.addHealListener(this);
-        characterPlayer.addBattleOverListener(this);
+        // Add itself as Observer for attack, defend, and use potion events to player
+        characterPlayer.addAttackObserver(this);
+        characterPlayer.addDefendObserver(this);
+        characterPlayer.addPotionUseObserver(this);
+        characterPlayer.addHealObserver(this);
+        characterPlayer.addBattleOverObserver(this);
 
-        // Add itself as listener for attack and defend to enemy
-        enemy.addAttackListener(this);
-        enemy.addDefendListener(this);
-        enemy.addBattleOverListener(this);
-        enemy.addSpecialAbilityListener(this);
+        // Add itself as Observer for attack and defend to enemy
+        enemy.addAttackObserver(this);
+        enemy.addDefendObserver(this);
+        enemy.addBattleOverObserver(this);
+        enemy.addSpecialAbilityObserver(this);
     }
 
     /**
@@ -246,20 +246,20 @@ public class BattleUI extends MenuItem implements AttackListener, DefendListener
      *
      * This method is called when battle is over
      */
-    private void detachListeners()
+    private void detachObservers()
     {
-        // Add itself as listener for attack, defend, and use potion events to player
-        characterPlayer.removeAttackListener(this);
-        characterPlayer.removeDefendListener(this);
-        characterPlayer.removePotionUseListener(this);
-        characterPlayer.removeHealListener(this);
-        characterPlayer.removeBattleOverListener(this);
+        // Add itself as Observer for attack, defend, and use potion events to player
+        characterPlayer.removeAttackObserver(this);
+        characterPlayer.removeDefendObserver(this);
+        characterPlayer.removePotionUseObserver(this);
+        characterPlayer.removeHealObserver(this);
+        characterPlayer.removeBattleOverObserver(this);
 
-        // Add itself as listener for attack and defend to enemy
-        enemy.removeAttackListener(this);
-        enemy.removeDefendListener(this);
-        enemy.removeBattleOverListener(this);
-        enemy.removeSpecialAbilityListener(this);
+        // Add itself as Observer for attack and defend to enemy
+        enemy.removeAttackObserver(this);
+        enemy.removeDefendObserver(this);
+        enemy.removeBattleOverObserver(this);
+        enemy.removeSpecialAbilityObserver(this);
     }
 
     /**
@@ -368,7 +368,7 @@ public class BattleUI extends MenuItem implements AttackListener, DefendListener
         }
 
         this.battleOver = true;
-        this.detachListeners();
+        this.detachObservers();
         this.terminate();
     }
 

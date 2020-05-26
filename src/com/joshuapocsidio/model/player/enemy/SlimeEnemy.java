@@ -26,7 +26,7 @@ public class SlimeEnemy extends EnemyPlayer
     /**
      * Template method hook for Slime specific special abilities
      * - makes the slime's attack output to be zero
-     * - notifies SpecialAbilityListeners
+     * - notifies SpecialAbilityObservers
      *
      * RETURN
      * - damage     : int
@@ -36,8 +36,8 @@ public class SlimeEnemy extends EnemyPlayer
         // Makes damage 0
         currentDamage = 0;
 
-        // Notify listeners of special ability event
-        this.notifySpecialAbilityListeners("Deals no damage...");
+        // Notify Observers of special ability event
+        this.notifySpecialAbilityObservers("Deals no damage...");
 
         return currentDamage;
     }

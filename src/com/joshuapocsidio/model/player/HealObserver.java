@@ -2,7 +2,7 @@ package com.joshuapocsidio.model.player;
 
 import com.joshuapocsidio.model.player.GamePlayer;
 
-public interface AttackListener
+public interface HealObserver
 {
-    void showAttackEvent(GamePlayer player, int damage);
+    void showHealEvent(GamePlayer player, int healed);
 }

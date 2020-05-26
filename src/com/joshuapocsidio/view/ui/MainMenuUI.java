@@ -1,7 +1,7 @@
 package com.joshuapocsidio.view.ui;
 
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
-import com.joshuapocsidio.model.player.character.GameOverListener;
+import com.joshuapocsidio.model.player.character.GameOverObserver;
 import com.joshuapocsidio.view.menu.Menu;
 
 /**
@@ -10,7 +10,7 @@ import com.joshuapocsidio.view.menu.Menu;
  * This class is responsible for
  * - showing interface output specific for options at the top level of the game
  */
-public class MainMenuUI extends Menu implements GameOverListener
+public class MainMenuUI extends Menu implements GameOverObserver
 {
     /** MainMenuUI Fields **/
     private final CharacterPlayer characterPlayer;
@@ -24,17 +24,17 @@ public class MainMenuUI extends Menu implements GameOverListener
 
         this.characterPlayer = characterPlayer;
 
-        this.initialiseListeners();
+        this.initialiseObservers();
     }
 
     /**
-     * Method to initialise this as listener for following:
-     * - game over listener for when the character player loses and game ends
+     * Method to initialise this as Observer for following:
+     * - game over Observer for when the character player loses and game ends
      */
-    private void initialiseListeners()
+    private void initialiseObservers()
     {
-        // Add itself as listener for attack, defend, and use potion events to player
-        characterPlayer.addGameOverListener(this);
+        // Add itself as Observer for attack, defend, and use potion events to player
+        characterPlayer.addGameOverObserver(this);
     }
 
     /**
