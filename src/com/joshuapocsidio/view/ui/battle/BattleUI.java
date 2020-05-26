@@ -7,7 +7,7 @@ import com.joshuapocsidio.model.player.character.CharacterPlayer;
 import com.joshuapocsidio.model.player.character.PotionUseObserver;
 import com.joshuapocsidio.model.player.enemy.EnemyPlayer;
 import com.joshuapocsidio.model.player.enemy.SpecialAbilityObserver;
-import com.joshuapocsidio.view.menu.MenuItem;
+import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.util.Scanner;
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input in between the turns of a battle
  */
-public class BattleUI extends MenuItem implements AttackObserver, DefendObserver, PotionUseObserver, HealObserver, BattleEndObserver, SpecialAbilityObserver
+public class BattleUI extends MenuAction implements AttackObserver, DefendObserver, PotionUseObserver, HealObserver, BattleEndObserver, SpecialAbilityObserver
 {
     /** BattleUI Fields **/
     private final CharacterPlayer characterPlayer;

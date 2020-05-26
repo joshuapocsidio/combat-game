@@ -4,7 +4,7 @@ import com.joshuapocsidio.controller.player.CharacterController;
 import com.joshuapocsidio.controller.player.CharacterControllerException;
 import com.joshuapocsidio.model.item.weapon.WeaponItem;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
-import com.joshuapocsidio.view.menu.MenuItem;
+import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when changing weapon of character player
  */
-public class ChangeWeaponUI extends MenuItem
+public class ChangeWeaponUI extends MenuAction
 {
     /** ChangeArmourUI Fields **/
     private final CharacterPlayer player;

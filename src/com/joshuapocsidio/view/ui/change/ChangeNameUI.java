@@ -3,7 +3,7 @@ package com.joshuapocsidio.view.ui.change;
 import com.joshuapocsidio.controller.player.CharacterController;
 import com.joshuapocsidio.controller.player.CharacterControllerException;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
-import com.joshuapocsidio.view.menu.MenuItem;
+import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 /**
@@ -14,7 +14,7 @@ import com.joshuapocsidio.view.ui.UserInterface;
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when changing the name of character player
  */
-public class ChangeNameUI extends MenuItem
+public class ChangeNameUI extends MenuAction
 {
     /** ChangeNameUI Fields **/
     private final CharacterPlayer player;

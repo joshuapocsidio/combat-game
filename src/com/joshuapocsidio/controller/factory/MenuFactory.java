@@ -6,8 +6,8 @@ import com.joshuapocsidio.controller.shop.ShopController;
 import com.joshuapocsidio.model.enchantment.EnchantmentDatabase;
 import com.joshuapocsidio.model.item.ItemDatabase;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
-import com.joshuapocsidio.view.menu.Menu;
-import com.joshuapocsidio.view.menu.MenuItem;
+import com.joshuapocsidio.view.menu.MenuDirectory;
+import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.*;
 import com.joshuapocsidio.view.ui.battle.BattleUI;
 import com.joshuapocsidio.view.ui.change.ChangeArmourUI;
@@ -16,7 +16,7 @@ import com.joshuapocsidio.view.ui.change.ChangeWeaponUI;
 import com.joshuapocsidio.view.ui.shop.BuyUI;
 import com.joshuapocsidio.view.ui.shop.EnchantUI;
 import com.joshuapocsidio.view.ui.shop.SellUI;
-import com.joshuapocsidio.view.ui.shop.ShopMenuUI;
+import com.joshuapocsidio.view.ui.shop.ShopMenuDirectoryUI;
 
 /**
  * Class for managing hierarchy of menus.
@@ -33,7 +33,7 @@ import com.joshuapocsidio.view.ui.shop.ShopMenuUI;
  */
 public class MenuFactory
 {
-    private Menu root;
+    private MenuDirectory root;
 
     // Models
     private final CharacterPlayer player;
@@ -103,14 +103,14 @@ public class MenuFactory
         }
 
         // Initialise the root
-        this.root = new MainMenuUI(player);
+        this.root = new MainMenuDirectoryUI(player);
 
         // Create main menu interfaces - First level
-        Menu shop = new ShopMenuUI(player, itemDatabase);
-        MenuItem battle = new BattleUI(player, battleController);
-        MenuItem nameChange = new ChangeNameUI(player, characterController);
-        MenuItem weaponChange = new ChangeWeaponUI(player, characterController);
-        MenuItem armourChange = new ChangeArmourUI(player, characterController);
+        MenuDirectory shop = new ShopMenuDirectoryUI(player, itemDatabase);
+        MenuAction battle = new BattleUI(player, battleController);
+        MenuAction nameChange = new ChangeNameUI(player, characterController);
+        MenuAction weaponChange = new ChangeWeaponUI(player, characterController);
+        MenuAction armourChange = new ChangeArmourUI(player, characterController);
 
         // Add main menu interfaces
         this.root.add(shop);
@@ -120,9 +120,9 @@ public class MenuFactory
         this.root.add(battle);
 
         // Create Shop interfaces - Second level (shop)
-        MenuItem buy = new BuyUI(itemDatabase, shopController);
-        MenuItem sell = new SellUI(player, shopController);
-        MenuItem enchant = new EnchantUI(player, enchantmentDatabase, shopController);
+        MenuAction buy = new BuyUI(itemDatabase, shopController);
+        MenuAction sell = new SellUI(player, shopController);
+        MenuAction enchant = new EnchantUI(player, enchantmentDatabase, shopController);
 
         // Add Shop interfaces
         shop.add(buy);

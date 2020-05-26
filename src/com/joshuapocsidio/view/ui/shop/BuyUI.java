@@ -5,7 +5,7 @@ import com.joshuapocsidio.controller.shop.InvalidShopActionException;
 import com.joshuapocsidio.model.item.GameItem;
 import com.joshuapocsidio.model.item.ItemDatabase;
 import com.joshuapocsidio.model.item.InvalidItemDatabaseException;
-import com.joshuapocsidio.view.menu.MenuItem;
+import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 /**
@@ -16,7 +16,7 @@ import com.joshuapocsidio.view.ui.UserInterface;
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when buying items from the shop
  */
-public class BuyUI extends MenuItem
+public class BuyUI extends MenuAction
 {
     /** BuyUI Fields **/
     private final ItemDatabase itemDatabase;

@@ -3,7 +3,7 @@ package com.joshuapocsidio.view.menu;
 import java.util.Scanner;
 
 /**
- * Abstract class for MenuItem and implements MenuInterface
+ * Abstract class for MenuAction and implements MenuInterface
  * - acts as the Leaf Class for the Composite Design Pattern
  *
  * NOTE - To allow for consistency, 0 is reserved for the exit option.
@@ -15,19 +15,19 @@ import java.util.Scanner;
  * Additionally, if this exit option is set to a non-default value, code must be implemented
  * to ensure that the users will be prompted with the appropriate exit option gui output.
  *
- * This must always be kept in mind when defining own MenuItem subclasses.
+ * This must always be kept in mind when defining own MenuAction subclasses.
  */
-public abstract class MenuItem implements MenuInterface
+public abstract class MenuAction implements MenuInterface
 {
     /** Input scanner as a variable to avoid constant redeclaration */
     private final Scanner input = new Scanner(System.in);
 
-    /** MenuItem Fields **/
+    /** MenuAction Fields **/
     protected String menuLabel;
     private String exitOption;
     private boolean done;
 
-    /** Template Method Hook to get specific output of specific MenuItem subclass */
+    /** Template Method Hook to get specific output of specific MenuAction subclass */
     protected abstract String getInterfaceOutput();
     /** Template Method Hook to check if user input is valid */
     protected abstract boolean isValid(String choiceStr);
@@ -38,13 +38,13 @@ public abstract class MenuItem implements MenuInterface
      * Default Constructor
      * - sets default exit option to a string type of 0
      */
-    public MenuItem()
+    public MenuAction()
     {
         this.exitOption = "0";
     }
 
     /**
-     * Method to show the user interface of MenuItem objects
+     * Method to show the user interface of MenuAction objects
      * - specific output is obtained from subclasses
      * - loops until exit option is chosen
      * - if user input is invalid, loop and re-prompt user
@@ -73,7 +73,7 @@ public abstract class MenuItem implements MenuInterface
                 {
                     if(choiceStr.equals(exitOption)) // If user input equals exit option
                     {
-                        // Terminate this menu item
+                        // Terminate this MenuAction
                         this.terminate();
                     }
                     else // If user input is not exit, then do action defined by subclass
@@ -91,7 +91,7 @@ public abstract class MenuItem implements MenuInterface
     }
 
     /**
-     * Method to terminate this menu item
+     * Method to terminate this MenuAction
      */
     @Override
     public void terminate()

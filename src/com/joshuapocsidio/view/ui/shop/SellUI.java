@@ -5,7 +5,7 @@ import com.joshuapocsidio.controller.shop.InvalidShopActionException;
 import com.joshuapocsidio.model.item.GameItem;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
 import com.joshuapocsidio.model.player.character.CharacterPlayerException;
-import com.joshuapocsidio.view.menu.MenuItem;
+import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 /**
@@ -16,7 +16,7 @@ import com.joshuapocsidio.view.ui.UserInterface;
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when selling items to the shop
  */
-public class SellUI extends MenuItem
+public class SellUI extends MenuAction
 {
     /** SellUI Fields **/
     private final CharacterPlayer player;

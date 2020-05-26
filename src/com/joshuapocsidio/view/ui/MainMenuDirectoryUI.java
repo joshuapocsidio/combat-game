@@ -2,7 +2,7 @@ package com.joshuapocsidio.view.ui;
 
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
 import com.joshuapocsidio.model.player.character.GameOverObserver;
-import com.joshuapocsidio.view.menu.Menu;
+import com.joshuapocsidio.view.menu.MenuDirectory;
 
 /**
  * View class for MainMenuUI and extends Menu
@@ -10,7 +10,7 @@ import com.joshuapocsidio.view.menu.Menu;
  * This class is responsible for
  * - showing interface output specific for options at the top level of the game
  */
-public class MainMenuUI extends Menu implements GameOverObserver
+public class MainMenuDirectoryUI extends MenuDirectory implements GameOverObserver
 {
     /** MainMenuUI Fields **/
     private final CharacterPlayer characterPlayer;
@@ -18,7 +18,7 @@ public class MainMenuUI extends Menu implements GameOverObserver
     /**
      * Constructor
      */
-    public MainMenuUI(CharacterPlayer characterPlayer)
+    public MainMenuDirectoryUI(CharacterPlayer characterPlayer)
     {
         super();
 

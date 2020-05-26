@@ -2,7 +2,7 @@ package com.joshuapocsidio.view.ui.shop;
 
 import com.joshuapocsidio.model.item.ItemDatabase;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
-import com.joshuapocsidio.view.menu.Menu;
+import com.joshuapocsidio.view.menu.MenuDirectory;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 /**
@@ -11,7 +11,7 @@ import com.joshuapocsidio.view.ui.UserInterface;
  * This class is responsible for
  * - showing interface output specific for options and corresponding interface when inside the shop
  */
-public class ShopMenuUI extends Menu
+public class ShopMenuDirectoryUI extends MenuDirectory
 {
     /** ShopMenuUI Fields **/
     private final CharacterPlayer player;
@@ -20,7 +20,7 @@ public class ShopMenuUI extends Menu
     /**
      * Constructor
      */
-    public ShopMenuUI(CharacterPlayer player, ItemDatabase itemDatabase)
+    public ShopMenuDirectoryUI(CharacterPlayer player, ItemDatabase itemDatabase)
     {
         super();
         this.menuLabel = "Go to Shop";

@@ -6,34 +6,34 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Abstract class for Menu and implements MenuInterface
+ * Abstract class for MenuDirectory and implements MenuInterface
  * - contains zero to many MenuInterface
  * - acts as the Composite Class for the Composite Design Pattern
  *
  * NOTE - To allow for consistency, 0 is reserved for the exit option.
- * This allows for the menu option list to always start from 1, 2, etc. This must always
- * be kept in mind when defining own Menu subclasses
+ * This allows for the MenuDirectory option list to always start from 1, 2, etc. This must always
+ * be kept in mind when defining own MenuDirectory subclasses
  */
-public abstract class Menu implements MenuInterface
+public abstract class MenuDirectory implements MenuInterface
 {
     /** Input scanner as a variable to avoid constant redeclaration */
     private final Scanner input = new Scanner(System.in);
 
-    /** Menu Fields **/
+    /** MenuDirectory Fields **/
     protected String menuLabel;
     private final List<MenuInterface> items = new LinkedList<>();
     private boolean done;
 
-    /** Template Method Hook to get specific output of specific Menu subclass */
+    /** Template Method Hook to get specific output of specific MenuDirectory subclass */
     protected abstract String getInterfaceOutput();
 
     /**
-     * Method to show the user interface of Menu objects
+     * Method to show the user interface of MenuDirectory objects
      * - specific output is obtained from subclasses
      * - loops until exit option is chosen
      * - if user input is invalid, loop and re-prompt user
      *
-     * NOTE - Menu's are implemented so that the option choices as index starts at 1.
+     * NOTE - MenuDirectory's are implemented so that the option choices as index starts at 1.
      */
     @Override
     public void show()
@@ -57,15 +57,15 @@ public abstract class Menu implements MenuInterface
                 {
                     if (choice == 0) // If user input is 0
                     {
-                        // Terminate this menu
+                        // Terminate this MenuDirectory
                         isValidInput = true;
                         this.terminate();
                     }
-                    else if (choice > items.size()) // If user input is greater than the size of the menu list
+                    else if (choice > items.size()) // If user input is greater than the size of the MenuDirectory list
                     {
                         System.out.println("Input out of bounds - Please try again");
                     }
-                    else // If user input is within the bounds of menu list
+                    else // If user input is within the bounds of MenuDirectory list
                     {
                         isValidInput = true;
 
@@ -83,7 +83,7 @@ public abstract class Menu implements MenuInterface
     }
 
     /**
-     * Method to terminate the menu tree under this menu
+     * Method to terminate the menu tree under this MenuDirectory
      *
      * NOTE - This allows implementations that can terminate all underlying menu interfaces.
      * Particularly, this is used for ending the game if the player loses. More on this
@@ -98,12 +98,12 @@ public abstract class Menu implements MenuInterface
             item.terminate();
         }
 
-        // Terminate this menu interface
+        // Terminate this MenuDirectory interface
         this.done = true;
     }
 
     /**
-     * Method to add a menu interface under this menu
+     * Method to add a menu interface under this MenuDirectory
      */
     public void add(MenuInterface item)
     {
@@ -116,7 +116,7 @@ public abstract class Menu implements MenuInterface
     }
 
     /**
-     * Method to remove a menu interface under this menu
+     * Method to remove a menu interface under this MenuDirectory
      */
     public void remove(MenuInterface item)
     {
@@ -131,7 +131,7 @@ public abstract class Menu implements MenuInterface
     /**
      * Method to obtain user input and validates it.
      *
-     * NOTE - Since Menu class is simply a Menu Interface which allows user to navigate through the tree,
+     * NOTE - Since MenuDirectory class is simply a Menu Interface which allows user to navigate through the tree,
      * user input are expected to always be numerical. Therefore, this class is implemented so that it only
      * accepts user input that are integers.
      */
@@ -157,7 +157,7 @@ public abstract class Menu implements MenuInterface
     }
 
     /**
-     * Method to obtain a string representation of the menu option list
+     * Method to obtain a string representation of the MenuDirectory option list
      *
      * NOTE - For simplicity, exit option is by default a 0
      */
