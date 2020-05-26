@@ -190,12 +190,13 @@ public class CharacterPlayer extends CombatPlayer
         {
             if(item.getName().equals(potion.getName()))
             {
-                int effect;
+                notifyPotionUseObservers(potion.getName());
 
+                int effect;
                 effect = potion.use(this);
+
                 inventory.remove(item);
 
-                notifyPotionUseObservers(potion.getName(), effect);
                 return effect;
             }
         }
@@ -524,11 +525,11 @@ public class CharacterPlayer extends CombatPlayer
         // TODO : Throw exception if battle obs does not exist
     }
 
-    public void notifyPotionUseObservers(String name, int damage)
+    public void notifyPotionUseObservers(String name)
     {
         for(PotionUseObserver potionUseObserver : potionUseObservers)
         {
-            potionUseObserver.showPotionUseEvent(this, name, damage);
+            potionUseObserver.showPotionUseEvent(this, name);
         }
     }
 

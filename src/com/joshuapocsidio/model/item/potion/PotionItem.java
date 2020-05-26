@@ -2,6 +2,10 @@ package com.joshuapocsidio.model.item.potion;
 
 import com.joshuapocsidio.model.item.GameItem;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
+import com.joshuapocsidio.model.player.character.PotionUseObserver;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Model abstract class for potion items inheriting from game item.
@@ -15,7 +19,7 @@ public abstract class PotionItem extends GameItem
 
     public PotionItem(String name, int minEffect, int maxEffect,  int cost)
     {
-        super(name, cost, minEffect, maxEffect);
+        super(name, minEffect, maxEffect, cost);
     }
 
     /**
@@ -29,7 +33,6 @@ public abstract class PotionItem extends GameItem
     public int use(CharacterPlayer player)
     {
         int baseEffect = super.calculateEffect();
-
         return this.doSpecificEffect(player, baseEffect);
     }
 
@@ -44,4 +47,5 @@ public abstract class PotionItem extends GameItem
                 "Effect = " + this.getMinEffect() +
                 " - " + this.getMaxEffect();
     }
+
 }

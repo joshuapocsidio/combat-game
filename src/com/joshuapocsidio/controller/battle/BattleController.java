@@ -51,7 +51,8 @@ public class BattleController
         // If damage is 0, it is only for healing. If less than 0, invalid
         if (damage > 0)
         {
-            p2.setHealth(p2.getHealth() - damage);
+            //p2.setHealth(p2.getHealth() - damage);
+            p2.defend(damage);
         }
     }
 

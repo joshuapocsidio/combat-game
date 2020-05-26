@@ -104,9 +104,19 @@ public abstract class GameItem
      */
     protected int calculateEffect()
     {
-        Random rand = new Random();
+        int effect;
 
-        return rand.nextInt(maxEffect - minEffect + 1) + minEffect;
+        if(maxEffect != minEffect)
+        {
+            Random rand = new Random();
+            effect = rand.nextInt(maxEffect - minEffect + 1) + minEffect;
+        }
+        else
+        {
+            effect = maxEffect;
+        }
+
+        return effect;
     }
 
     /**

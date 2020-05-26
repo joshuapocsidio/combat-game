@@ -33,6 +33,7 @@ public abstract class CombatPlayer
     /** List of observers **/
     private List<AttackObserver> attackObservers;
     private List<DefendObserver> defendObservers;
+    private List<DamageDealtObserver> damageDealtObservers;
     private List<HealObserver> healObservers;
     private List<BattleEndObserver> battleEndObservers;
 
@@ -55,6 +56,7 @@ public abstract class CombatPlayer
 
         attackObservers = new LinkedList<>();
         defendObservers = new LinkedList<>();
+        damageDealtObservers = new LinkedList<>();
         healObservers = new LinkedList<>();
         battleEndObservers = new LinkedList<>();
     }
@@ -103,7 +105,7 @@ public abstract class CombatPlayer
         finalDamage = Math.max(finalDamage, 0);
 
         // Notify Observers for defend event
-        this.notifyDefendObservers(blocked, finalDamage);
+        this.notifyDefendObservers(blocked);
 
         // Update the health of this player
         this.setHealth(this.getHealth() - finalDamage);
@@ -145,6 +147,13 @@ public abstract class CombatPlayer
 
             // Notify Observers of heal event
             notifyHealObservers(healed);
+        }
+        else
+        {
+            int damage = this.currentHealth - health;
+
+            // Notify observers of damage event
+            notifyDamageDealtObservers(damage);
         }
 
         // If health is zero or negative
@@ -220,11 +229,32 @@ public abstract class CombatPlayer
         defendObservers.remove(defendObserver);
     }
 
-    public void notifyDefendObservers(int blocked, int damageTaken)
+    public void notifyDefendObservers(int blocked)
     {
         for(DefendObserver Observer : defendObservers)
         {
-            Observer.showDefendEvent(this, blocked, damageTaken);
+            Observer.showDefendEvent(this, blocked);
+        }
+    }
+
+    /**
+     * Methods for adding, removing, and notifying DefendObservers
+     */
+    public void addDamageDealtObserver(DamageDealtObserver damageDealtObserver)
+    {
+        damageDealtObservers.add(damageDealtObserver);
+    }
+
+    public void removeDamageDealtObserver(DamageDealtObserver damageDealtObserver)
+    {
+        damageDealtObservers.remove(damageDealtObserver);
+    }
+
+    public void notifyDamageDealtObservers(int damage)
+    {
+        for(DamageDealtObserver observer : damageDealtObservers)
+        {
+            observer.showDamageEvent(this, damage);
         }
     }
 

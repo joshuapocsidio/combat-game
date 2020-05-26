@@ -22,7 +22,7 @@ import java.util.Scanner;
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input in between the turns of a battle
  */
-public class BattleView extends MenuAction implements AttackObserver, DefendObserver, PotionUseObserver, HealObserver, BattleEndObserver, SpecialAbilityObserver
+public class BattleView extends MenuAction implements AttackObserver, DefendObserver, DamageDealtObserver, PotionUseObserver, HealObserver, BattleEndObserver, SpecialAbilityObserver
 {
     /** BattleView Fields **/
     private final CharacterPlayer characterPlayer;
@@ -31,6 +31,8 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
     private EnemyPlayer enemy;
     private boolean battleOver;
 
+
+    private static final Scanner input = new Scanner(System.in);
     /**
      * Constructor
      */
@@ -117,7 +119,6 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         if(!battleOver)
         {
             // Get user input
-            Scanner input = new Scanner(System.in);
             int choice = Integer.parseInt(choiceStr);
 
             switch (choice)
@@ -126,22 +127,8 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
                     battleController.fight(characterPlayer, enemy);
                     break;
                 case 2: // Use Potion
-                    // Get all items from player inventory
-                    List<PotionItem> potionItemList = characterPlayer.getPotions();
-
-                    // If player has potions
-                    if (potionItemList.size() > 0)
+                    if(!this.doPotionAction())
                     {
-                        // Show user of available potions
-                        System.out.println(characterPlayer.getPotionListString());
-                        // Get chosen potion from user input
-                        int potionChoice = Integer.parseInt(input.nextLine());
-                        // Attempt to user potion
-                        battleController.usePotion(characterPlayer, enemy, potionItemList.get(potionChoice - 1));
-                    }
-                    else
-                    {
-                        System.out.println("You have no potions - Please try again");
                         return false;
                     }
                     break;
@@ -171,6 +158,57 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         return battleOver;
     }
 
+    private boolean doPotionAction()
+    {
+        // Get all items from player inventory
+        List<PotionItem> potionItemList = characterPlayer.getPotions();
+
+        // If player has potions
+        if (potionItemList.size() > 0)
+        {
+            String potionListString = characterPlayer.getPotionListString() + "\n\n0 - Back";
+            int potionCount = characterPlayer.getPotions().size();
+
+            // Show user of available potions
+            System.out.println(potionListString);
+            boolean potionDone = false;
+
+            while(!potionDone)
+            {
+                try
+                {
+                    // Get chosen potion from user input
+                    int potionChoice = Integer.parseInt(input.nextLine());
+
+                    if (potionChoice == 0)
+                    {
+                        potionDone = true;
+                        return false;
+                    }
+                    else if (potionChoice > 0 && potionChoice <= potionCount)
+                    {
+                        // Attempt to user potion
+                        battleController.usePotion(characterPlayer, enemy, potionItemList.get(potionChoice - 1));
+                        potionDone = true;
+                    }
+                    else
+                    {
+                        System.out.println("Invalid potion choice - Please try again");
+                    }
+                }
+                catch(NumberFormatException e)
+                {
+                    System.out.println("Invalid input - Please try again");
+                }
+            }
+        }
+        else
+        {
+            System.out.println("You have no potions - Please try again");
+            return false;
+        }
+        return true;
+    }
     /**
      * Method which defines what kind if user input is valid
      *
@@ -230,6 +268,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         // Add itself as Observer for attack, defend, and use potion events to player
         characterPlayer.addAttackObserver(this);
         characterPlayer.addDefendObserver(this);
+        characterPlayer.addDamageDealtObserver(this);
         characterPlayer.addPotionUseObserver(this);
         characterPlayer.addHealObserver(this);
         characterPlayer.addBattleOverObserver(this);
@@ -237,6 +276,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         // Add itself as Observer for attack and defend to enemy
         enemy.addAttackObserver(this);
         enemy.addDefendObserver(this);
+        enemy.addDamageDealtObserver(this);
         enemy.addBattleOverObserver(this);
         enemy.addSpecialAbilityObserver(this);
     }
@@ -251,6 +291,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         // Add itself as Observer for attack, defend, and use potion events to player
         characterPlayer.removeAttackObserver(this);
         characterPlayer.removeDefendObserver(this);
+        characterPlayer.removeDamageDealtObserver(this);
         characterPlayer.removePotionUseObserver(this);
         characterPlayer.removeHealObserver(this);
         characterPlayer.removeBattleOverObserver(this);
@@ -258,6 +299,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         // Add itself as Observer for attack and defend to enemy
         enemy.removeAttackObserver(this);
         enemy.removeDefendObserver(this);
+        enemy.addDamageDealtObserver(this);
         enemy.removeBattleOverObserver(this);
         enemy.removeSpecialAbilityObserver(this);
     }
@@ -284,7 +326,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
      * - shows if the player who defended did not take any damage
      */
     @Override
-    public void showDefendEvent(CombatPlayer player, int blocked, int damageTaken)
+    public void showDefendEvent(CombatPlayer player, int blocked)
     {
         System.out.println();
         System.out.println("-------- BATTLE ANNOUNCER --------");
@@ -292,17 +334,23 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         {
             System.out.println(player.getName() + " defended " + blocked + " damage!!");
         }
+    }
 
-        if(damageTaken != 0)
-        {
-            System.out.println(player.getName() + " took " + damageTaken + " damage!!");
-            System.out.println(player.getName() + " has " + (Math.max(player.getHealth() - damageTaken, 0)) + " life points left!");
-        }
-        else
+    @Override
+    public void showDamageEvent(CombatPlayer player, int damage)
+    {
+        System.out.println();
+        System.out.println("-------- BATTLE ANNOUNCER --------");
+
+        if(damage == 0)
         {
             System.out.println(player.getName() + " took no damage!!");
         }
-
+        else if(damage > 0)
+        {
+            System.out.println(player.getName() + " took " + damage + " damage!!");
+            System.out.println(player.getName() + " has " + (Math.max(player.getHealth() - damage, 0)) + " life points left!");
+        }
     }
 
     /**
@@ -311,18 +359,11 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
      * - shows output damage before defence calculations (if any)
      */
     @Override
-    public void showPotionUseEvent(CombatPlayer player, String name, int damage)
+    public void showPotionUseEvent(CombatPlayer player, String name)
     {
         System.out.println();
         System.out.println("-------- BATTLE ANNOUNCER --------");
-        if(damage > 0)
-        {
-            System.out.println(player.getName() + " used " + name + " to deal " + damage + " damage!!");
-        }
-        else
-        {
-            System.out.println(player.getName() + " used " + name + "!!");
-        }
+        System.out.println(player.getName() + " used " + name + "!!");
     }
 
     /**
@@ -335,6 +376,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
     {
         System.out.println();
         System.out.println(player.getName() + " healed for " + healed + " life points!!");
+        System.out.println(player.getName() + " now has " + Math.min(player.getHealth() + healed, player.getMaxHealth()) + " life points.");
     }
 
     /**
@@ -423,5 +465,6 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
             System.out.println("Please try again");
         }
     }
+
 }
 
