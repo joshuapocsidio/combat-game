@@ -7,23 +7,23 @@ import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.UserInterface;
 
 /**
- * View class for ChangeNameUI and extends MenuItem
+ * View class for ChangeNameView and extends MenuItem
  *
  * This class is responsible for
  * - showing interface output specific for changing the name of character player
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when changing the name of character player
  */
-public class ChangeNameUI extends MenuAction
+public class ChangeNameView extends MenuAction
 {
-    /** ChangeNameUI Fields **/
+    /** ChangeNameView Fields **/
     private final CharacterPlayer player;
     private final CharacterController characterController;
 
     /**
      * Constructor
      */
-    public ChangeNameUI(CharacterPlayer player, CharacterController characterController)
+    public ChangeNameView(CharacterPlayer player, CharacterController characterController)
     {
         super();
         this.menuLabel = "Change Character Name";
