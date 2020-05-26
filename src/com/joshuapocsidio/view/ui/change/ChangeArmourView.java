@@ -10,23 +10,23 @@ import com.joshuapocsidio.view.ui.UserInterface;
 import java.util.List;
 
 /**
- * View class for ChangeArmourUI and extends MenuItem
+ * View class for ChangeArmourView and extends MenuItem
  *
  * This class is responsible for
  * - showing interface output specific for changing the armour of character player
  * - defining how the user interface will behave under this menu interface
  * - defining what is a valid input when changing armour of character player
  */
-public class ChangeArmourUI extends MenuAction
+public class ChangeArmourView extends MenuAction
 {
-    /** ChangeArmourUI Fields **/
+    /** ChangeArmourView Fields **/
     private final CharacterPlayer player;
     private final CharacterController characterController;
 
     /**
      * Constructor
      */
-    public ChangeArmourUI(CharacterPlayer player, CharacterController characterController)
+    public ChangeArmourView(CharacterPlayer player, CharacterController characterController)
     {
         super();
         this.menuLabel = "Change Armour";

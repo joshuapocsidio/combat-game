@@ -10,7 +10,7 @@ import com.joshuapocsidio.view.menu.MenuDirectory;
 import com.joshuapocsidio.view.menu.MenuAction;
 import com.joshuapocsidio.view.ui.*;
 import com.joshuapocsidio.view.ui.battle.BattleView;
-import com.joshuapocsidio.view.ui.change.ChangeArmourUI;
+import com.joshuapocsidio.view.ui.change.ChangeArmourView;
 import com.joshuapocsidio.view.ui.change.ChangeNameUI;
 import com.joshuapocsidio.view.ui.change.ChangeWeaponUI;
 import com.joshuapocsidio.view.ui.shop.BuyUI;
@@ -110,7 +110,7 @@ public class MenuFactory
         MenuAction battle = new BattleView(player, battleController);
         MenuAction nameChange = new ChangeNameUI(player, characterController);
         MenuAction weaponChange = new ChangeWeaponUI(player, characterController);
-        MenuAction armourChange = new ChangeArmourUI(player, characterController);
+        MenuAction armourChange = new ChangeArmourView(player, characterController);
 
         // Add main menu interfaces
         this.root.add(shop);
