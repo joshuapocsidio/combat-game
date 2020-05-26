@@ -70,7 +70,7 @@ public class MainMenuUI extends Menu implements GameOverObserver
      * to ensure that all interfaces are ended
      */
     @Override
-    public void endGame()
+    public void showEndGame()
     {
         this.terminate();
 

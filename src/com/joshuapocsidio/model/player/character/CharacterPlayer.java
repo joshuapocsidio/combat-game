@@ -550,7 +550,7 @@ public class CharacterPlayer extends GamePlayer
     {
         for(GameOverObserver gameOverObserver : gameOverObservers)
         {
-            gameOverObserver.endGame();
+            gameOverObserver.showEndGame();
         }
     }
 }
