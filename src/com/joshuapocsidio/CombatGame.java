@@ -8,8 +8,8 @@ import com.joshuapocsidio.controller.io.InvalidItemDataSourceException;
 import com.joshuapocsidio.controller.io.ItemDatabaseManager;
 import com.joshuapocsidio.controller.player.CharacterController;
 import com.joshuapocsidio.controller.shop.ShopController;
-import com.joshuapocsidio.controller.ui.InvalidMenuManagerException;
-import com.joshuapocsidio.controller.ui.MenuManager;
+import com.joshuapocsidio.controller.factory.InvalidMenuFactoryException;
+import com.joshuapocsidio.controller.factory.MenuFactory;
 import com.joshuapocsidio.model.enchantment.EnchantmentDatabase;
 import com.joshuapocsidio.model.item.ItemDatabase;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
@@ -45,16 +45,16 @@ public class CombatGame
             BattleController battleController = new BattleController(enemyFactory);
 
             /* Initialize menu manager and show UI */
-            MenuManager menuManager = new MenuManager(player, itemDatabase, enchantmentDatabase, characterController, shopController, battleController);
-            menuManager.initialiseMenuTree();
-            menuManager.showUI();
+            MenuFactory menuFactory = new MenuFactory(player, itemDatabase, enchantmentDatabase, characterController, shopController, battleController);
+            menuFactory.initialiseMenuTree();
+            menuFactory.showUI();
         }
         catch (InvalidItemDataSourceException e)
         {
             System.out.println("System : " + e.getMessage());
             System.out.println("Check source of database");
         }
-        catch (InvalidMenuManagerException e)
+        catch (InvalidMenuFactoryException e)
         {
             e.printStackTrace();
         }

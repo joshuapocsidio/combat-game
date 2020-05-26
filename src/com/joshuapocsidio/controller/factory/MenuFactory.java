@@ -1,4 +1,4 @@
-package com.joshuapocsidio.controller.ui;
+package com.joshuapocsidio.controller.factory;
 
 import com.joshuapocsidio.controller.battle.BattleController;
 import com.joshuapocsidio.controller.player.CharacterController;
@@ -31,7 +31,7 @@ import com.joshuapocsidio.view.ui.shop.ShopMenuUI;
  * This also allows the separation of concerns between different
  * sections and segments of the game.
  */
-public class MenuManager
+public class MenuFactory
 {
     private Menu root;
 
@@ -45,7 +45,7 @@ public class MenuManager
     private final ShopController shopController;
     private final BattleController battleController;
 
-    public MenuManager(CharacterPlayer player, ItemDatabase itemDatabase, EnchantmentDatabase enchantmentDatabase,
+    public MenuFactory(CharacterPlayer player, ItemDatabase itemDatabase, EnchantmentDatabase enchantmentDatabase,
                        CharacterController characterController, ShopController shopController, BattleController battleController)
     {
         this.player = player;
@@ -60,10 +60,10 @@ public class MenuManager
     /**
      * Method for initialising menu tree/hierarchy.
      * Error handling are done here so that user has the freedom
-     * to create the MenuManager object and initialise it
+     * to create the MenuFactory object and initialise it
      * at another point of code.
      */
-    public void initialiseMenuTree() throws InvalidMenuManagerException
+    public void initialiseMenuTree() throws InvalidMenuFactoryException
     {
         String errorMessage = "";
         if(player == null)
@@ -99,7 +99,7 @@ public class MenuManager
         if(!errorMessage.equals(""))
         {
             errorMessage += "must not be null to initialise game menu";
-            throw new InvalidMenuManagerException(errorMessage);
+            throw new InvalidMenuFactoryException(errorMessage);
         }
 
         // Initialise the root
@@ -134,11 +134,11 @@ public class MenuManager
      * Method for launching and outputting the visual
      * user interface
      */
-    public void showUI() throws InvalidMenuManagerException
+    public void showUI() throws InvalidMenuFactoryException
     {
         if(root == null)
         {
-            throw new InvalidMenuManagerException("Root menu needs to be initialised");
+            throw new InvalidMenuFactoryException("Root menu needs to be initialised");
         }
         root.show();
     }
