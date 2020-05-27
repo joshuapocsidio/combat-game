@@ -29,8 +29,10 @@ public abstract class MenuAction implements MenuInterface
 
     /** Template Method Hook to get specific output of specific MenuAction subclass */
     protected abstract String getInterfaceOutput();
+
     /** Template Method Hook to check if user input is valid */
     protected abstract boolean isValid(String choiceStr);
+
     /** Template Method Hook to get specific action */
     protected abstract boolean doAction(String choiceStr);
 
@@ -58,7 +60,7 @@ public abstract class MenuAction implements MenuInterface
         while(!done)
         {
             // Output specific interface output from subclass
-            System.out.print(getInterfaceOutput());
+            System.out.print(this.getInterfaceOutput());
 
             // Loop until a valid input is provided
             boolean isValidInput = false;
@@ -69,6 +71,7 @@ public abstract class MenuAction implements MenuInterface
 
                 // What is valid is defined by subclass
                 isValidInput = this.isValid(choiceStr);
+
                 if(isValidInput)
                 {
                     if(choiceStr.equals(exitOption)) // If user input equals exit option
@@ -76,9 +79,10 @@ public abstract class MenuAction implements MenuInterface
                         // Terminate this MenuAction
                         this.terminate();
                     }
-                    else // If user input is not exit, then do action defined by subclass
+                    else // If user input is not exit
                     {
-                        done = doAction(choiceStr);
+                        // Do action defined by subclass
+                        done = this.doAction(choiceStr);
                     }
                 }
                 else

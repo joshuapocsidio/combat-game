@@ -16,13 +16,13 @@ import com.joshuapocsidio.model.player.character.CharacterPlayerException;
 public class ShopController
 {
     private final EnchantmentFactory enchantmentFactory;
-    private final CharacterPlayer player;
+    private final CharacterPlayer character;
 
-    public ShopController(CharacterPlayer player, EnchantmentFactory enchantmentFactory)
+    public ShopController(CharacterPlayer character, EnchantmentFactory enchantmentFactory)
     {
-        if(player == null)
+        if(character == null)
         {
-            throw new IllegalArgumentException("Character player cannot be null");
+            throw new IllegalArgumentException("Character cannot be null");
         }
 
         if(enchantmentFactory == null)
@@ -30,14 +30,14 @@ public class ShopController
             throw new IllegalArgumentException("Enchantment factory cannot be null");
         }
 
-        this.player = player;
+        this.character = character;
         this.enchantmentFactory = enchantmentFactory;
     }
 
     /**
      * Method for facilitating buy action from character
      * - checks if item is valid
-     * - checks if player has enough gold
+     * - checks if Character has enough gold
      */
     public void buy(GameItem item) throws InvalidShopActionException
     {
@@ -47,23 +47,23 @@ public class ShopController
         }
 
         int cost = item.getCost();
-        double playerGold = player.getGold();
+        double characterGold = character.getGold();
 
-        if(playerGold < cost)
+        if(characterGold < cost)
         {
             throw new InvalidShopActionException("Not enough gold");
         }
 
-        // Update player's gold based on cost of purchase
-        player.setGold(player.getGold() - cost);
+        // Update character's gold based on cost of purchase
+        character.setGold(character.getGold() - cost);
         // Add to inventory newly bought item
-        player.addToInventory(item);
+        character.addToInventory(item);
     }
 
     /**
      * Method for facilitating sell action from character
      * - checks if item is valid
-     * - checks if player has the item
+     * - checks if character has the item
      * - checks if the item is currently equipped
      */
     public void sell(GameItem item) throws InvalidShopActionException
@@ -73,7 +73,7 @@ public class ShopController
             throw new InvalidShopActionException("Item must be null");
         }
 
-        if(!player.hasItem(item))
+        if(!character.hasItem(item))
         {
             throw new InvalidShopActionException("Item not found in inventory");
         }
@@ -81,11 +81,11 @@ public class ShopController
         try
         {
             // Remove from inventory since item is sold
-            player.removeFromInventory(item);
+            character.removeFromInventory(item);
             // Sale price is only 50% of total price of item
             int profit = item.getCost() / 2;
-            // Update player's gold based on sale profit
-            player.setGold(player.getGold() + profit);
+            // Update character's gold based on sale profit
+            character.setGold(character.getGold() + profit);
         }
         catch(CharacterPlayerException e)
         {
@@ -98,7 +98,7 @@ public class ShopController
      * - checks if weapon is valid
      * - checks if enchantment name is valid
      * - checks if enchantment cost is valid
-     * - checks if player has enough gold to afford enchantment cost
+     * - checks if character has enough gold to afford enchantment cost
      */
     public void enchant(WeaponItem weapon, String enchantmentName, int enchantmentCost) throws InvalidShopActionException
     {
@@ -117,9 +117,9 @@ public class ShopController
             throw new InvalidShopActionException("Enchantment cost cannot be negative");
         }
 
-        // Check if player has enough gold
-        double playerGold = player.getGold();
-        if(playerGold < enchantmentCost)
+        // Check if character has enough gold
+        double characterGold = character.getGold();
+        if(characterGold < enchantmentCost)
         {
             throw new InvalidShopActionException("Not enough gold for enchantment - ");
         }
@@ -130,19 +130,19 @@ public class ShopController
             WeaponItem enchantedWeapon = enchantmentFactory.enchantWeapon(weapon, enchantmentName);
 
             // Add to inventory before checking
-            player.addToInventory(enchantedWeapon);
+            character.addToInventory(enchantedWeapon);
 
             // Check if weapon is currently equipped
-            if(player.getEquippedWeapon().equals(weapon))
+            if(character.getEquippedWeapon().equals(weapon))
             {
                 // If it is equipped, replace with new enchanted weapon
-                player.equipWeapon(enchantedWeapon);
+                character.equipWeapon(enchantedWeapon);
             }
 
             // Remove the un-enchanted weapon from inventory
-            player.removeFromInventory(weapon);
-            // Update player's gold based on cost of enchantment
-            player.setGold(player.getGold() - enchantmentCost);
+            character.removeFromInventory(weapon);
+            // Update character's gold based on cost of enchantment
+            character.setGold(character.getGold() - enchantmentCost);
         }
         catch (InvalidEnchantmentFactoryException e)
         {

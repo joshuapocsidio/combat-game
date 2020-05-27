@@ -55,7 +55,7 @@ public class MainMenuDirectory extends MenuDirectory implements GameOverObserver
                 .withPreInfo(characterPlayer.toString())
                 .withHeading("MAIN MENU")
                 .withSubHeading("Welcome to the Curtin Arena!")
-                .withBody(this.getMenuList())
+                .withBody(this.getMenuListString())
                 .withPrompt("What would you like to do?")
                 .build();
 

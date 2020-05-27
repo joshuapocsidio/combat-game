@@ -16,7 +16,7 @@ public class HealthPotion extends PotionItem
     }
 
     /**
-     * Template method hook for health potion specific functionality.
+     * Template hook method for health potion specific functionality.
      * Increases player health by calculated base effect and returns
      * 0 damage
      *

@@ -38,21 +38,17 @@ public class BattleController
 
     /**
      * Method that allows use of potion between character player and another player.
-     * Damage from potion is subtracted in case the potion is of damage type
-     * Healing potions should return 0 and therefore have no effect on other player
      *
-     * NOTE - potion use does not throw exceptions since potion objects are created
-     * using item factory with relevant constraints to prevent damage being negative.
+     * NOTE - potions have been implemented so that defence can also block potion damage
      */
-    public void usePotion(CharacterPlayer p1, CombatPlayer p2, PotionItem potion)
+    public void usePotion(CharacterPlayer character, CombatPlayer player, PotionItem potion)
     {
-        int damage = p1.usePotion(potion);
+        int damage = character.usePotion(potion);
 
         // If damage is 0, it is only for healing. If less than 0, invalid
         if (damage > 0)
         {
-            //p2.setHealth(p2.getHealth() - damage);
-            p2.defend(damage);
+            player.defend(damage);
         }
     }
 
@@ -72,12 +68,12 @@ public class BattleController
      * Method that gives character player rewards.
      * Rewards are based on the gold and health of defeated enemy
      */
-    public void givePlayerRewards(CharacterPlayer player, CombatPlayer enemy)
+    public void givePlayerRewards(CharacterPlayer character, CombatPlayer enemy)
     {
         /* Give gold reward */
-        player.setGold(player.getGold() + enemy.getGold());
+        character.setGold(character.getGold() + enemy.getGold());
 
         /* Give health reward */ // TODO : COMMENT ON THIS
-        player.setHealth((int)((double)player.getHealth() * 1.5));
+        character.setHealth((int)((double)character.getHealth() * 1.5));
     }
 }

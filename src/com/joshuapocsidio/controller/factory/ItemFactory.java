@@ -59,15 +59,15 @@ public class ItemFactory
             case "W":
                 String damageType = attributes[0].trim();
                 String weaponType = attributes[1].trim();
-                item = createWeapon(type, name, minEffect, maxEffect, cost, damageType, weaponType);
+                item = createWeapon(name, minEffect, maxEffect, cost, damageType, weaponType);
                 break;
             case "A":
                 String materialType = attributes[0].trim();
-                item = createArmour(type, name, minEffect, maxEffect, cost, materialType);
+                item = createArmour(name, minEffect, maxEffect, cost, materialType);
                 break;
             case "P":
                 String potionType = attributes[0].trim();
-                item = createPotion(type, name, minEffect, maxEffect, cost, potionType);
+                item = createPotion(name, minEffect, maxEffect, cost, potionType);
                 break;
             default:
                 throw new InvalidItemFactoryException("Item Type cannot be recognised");
@@ -79,7 +79,7 @@ public class ItemFactory
     /**
      * Creates weapon object
      */
-    private WeaponItem createWeapon(String type, String name, int minEffect, int maxEffect, int cost, String damageType, String weaponType) throws InvalidItemFactoryException
+    private WeaponItem createWeapon(String name, int minEffect, int maxEffect, int cost, String damageType, String weaponType) throws InvalidItemFactoryException
     {
         if(damageType.isEmpty() || damageType.isBlank())
         {
@@ -97,7 +97,7 @@ public class ItemFactory
     /**
      * Creates armour object
      */
-    private ArmourItem createArmour(String type, String name, int minEffect, int maxEffect, int cost, String materialType) throws InvalidItemFactoryException
+    private ArmourItem createArmour(String name, int minEffect, int maxEffect, int cost, String materialType) throws InvalidItemFactoryException
     {
         if(materialType.isEmpty() || materialType.isBlank())
         {
@@ -110,7 +110,7 @@ public class ItemFactory
     /**
      * Creates potion object
      */
-    private PotionItem createPotion(String type, String name, int minEffect, int maxEffect, int cost, String potionType) throws InvalidItemFactoryException
+    private PotionItem createPotion(String name, int minEffect, int maxEffect, int cost, String potionType) throws InvalidItemFactoryException
     {
         if(potionType.isBlank() || potionType.isEmpty())
         {

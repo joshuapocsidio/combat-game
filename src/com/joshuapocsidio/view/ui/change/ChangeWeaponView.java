@@ -20,18 +20,18 @@ import java.util.List;
 public class ChangeWeaponView extends MenuAction
 {
     /** ChangeWeaponView Fields **/
-    private final CharacterPlayer player;
+    private final CharacterPlayer character;
     private final CharacterController characterController;
 
     /**
      * Constructor
      */
-    public ChangeWeaponView(CharacterPlayer player, CharacterController characterController)
+    public ChangeWeaponView(CharacterPlayer character, CharacterController characterController)
     {
         super();
         this.menuLabel = "Change Weapon";
 
-        this.player = player;
+        this.character = character;
         this.characterController = characterController;
     }
 
@@ -50,10 +50,10 @@ public class ChangeWeaponView extends MenuAction
     {
         UserInterface ui = new UserInterface.Builder()
                 .withPreHeading("PLAYER INFO")
-                .withPreInfo(player.toString())
+                .withPreInfo(character.toString())
                 .withHeading("WEAPONRY")
                 .withSubHeading("Your weapon choice to save the world!")
-                .withBody(player.getWeaponListString() + "\n0  -  Exit")
+                .withBody(character.getWeaponListString() + "\n0  -  Exit")
                 .withPrompt("Enter integer of weapon choice : ")
                 .build();
 
@@ -77,7 +77,7 @@ public class ChangeWeaponView extends MenuAction
     protected boolean doAction(String choiceStr)
     {
         // Get all weapons from player
-        List<WeaponItem> weapons = player.getWeapons();
+        List<WeaponItem> weapons = character.getWeapons();
         try
         {
             // Equip weapon obtained from the list of weapons
@@ -87,9 +87,8 @@ public class ChangeWeaponView extends MenuAction
         catch (CharacterControllerException e)
         {
             System.out.println(e.getMessage() + " - Please try again");
+            return false;
         }
-
-        return false;
     }
 
     /**
@@ -109,7 +108,7 @@ public class ChangeWeaponView extends MenuAction
             int choice = Integer.parseInt(choiceStr);
 
             // Invalid if user is either negative or greater than the option list size
-            if(choice > player.getWeapons().size() || choice < 0)
+            if(choice > character.getWeapons().size() || choice < 0)
             {
                 System.out.print("Input is out of bounds! ");
                 return false;

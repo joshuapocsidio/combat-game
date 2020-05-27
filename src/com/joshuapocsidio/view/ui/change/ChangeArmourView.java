@@ -20,18 +20,18 @@ import java.util.List;
 public class ChangeArmourView extends MenuAction
 {
     /** ChangeArmourView Fields **/
-    private final CharacterPlayer player;
+    private final CharacterPlayer character;
     private final CharacterController characterController;
 
     /**
      * Constructor
      */
-    public ChangeArmourView(CharacterPlayer player, CharacterController characterController)
+    public ChangeArmourView(CharacterPlayer character, CharacterController characterController)
     {
         super();
         this.menuLabel = "Change Armour";
 
-        this.player = player;
+        this.character = character;
         this.characterController = characterController;
     }
 
@@ -50,10 +50,10 @@ public class ChangeArmourView extends MenuAction
     {
         UserInterface ui = new UserInterface.Builder()
                 .withPreHeading("PLAYER INFO")
-                .withPreInfo(player.toString())
+                .withPreInfo(character.toString())
                 .withHeading("WEAPONRY")
                 .withSubHeading("Your armour choice to defend from evil!")
-                .withBody(player.getArmourListString() + "\n0  -  Exit")
+                .withBody(character.getArmourListString() + "\n0  -  Exit")
                 .withPrompt("Enter integer of weapon choice : ")
                 .build();
 
@@ -77,7 +77,7 @@ public class ChangeArmourView extends MenuAction
     protected boolean doAction(String choiceStr)
     {
         // Get all armours from player
-        List<ArmourItem> armours = player.getArmours();
+        List<ArmourItem> armours = character.getArmours();
         try
         {
             // Equip armour obtained from the list of armours
@@ -87,9 +87,8 @@ public class ChangeArmourView extends MenuAction
         catch(CharacterControllerException e)
         {
             System.out.println(e.getMessage() + " - Please try again");
+            return false;
         }
-
-        return false;
     }
 
     /**
@@ -110,7 +109,7 @@ public class ChangeArmourView extends MenuAction
             int choice = Integer.parseInt(choiceStr);
 
             // Invalid if user is either negative or greater than the option list size
-            if(choice > player.getArmours().size() || choice < 0)
+            if(choice > character.getArmours().size() || choice < 0)
             {
                 System.out.print("Input is out of bounds - ");
                 return false;

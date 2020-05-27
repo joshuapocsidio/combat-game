@@ -17,18 +17,18 @@ import com.joshuapocsidio.view.ui.UserInterface;
 public class ChangeNameView extends MenuAction
 {
     /** ChangeNameView Fields **/
-    private final CharacterPlayer player;
+    private final CharacterPlayer character;
     private final CharacterController characterController;
 
     /**
      * Constructor
      */
-    public ChangeNameView(CharacterPlayer player, CharacterController characterController)
+    public ChangeNameView(CharacterPlayer character, CharacterController characterController)
     {
         super();
         this.menuLabel = "Change Character Name";
 
-        this.player = player;
+        this.character = character;
         this.characterController = characterController;
     }
 
@@ -47,10 +47,10 @@ public class ChangeNameView extends MenuAction
     {
         UserInterface ui = new UserInterface.Builder()
                 .withPreHeading("PLAYER INFO")
-                .withPreInfo(player.toString())
+                .withPreInfo(character.toString())
                 .withHeading("CHANGE NAME")
                 .withSubHeading("Your fighter's name will be displayed wherever you go!")
-                .withBody("Current name : " + player.getName())
+                .withBody("Current name : " + character.getName())
                 .withFooter("0  -  Exit")
                 .withPrompt("Enter character name : ")
                 .build();
@@ -75,15 +75,14 @@ public class ChangeNameView extends MenuAction
     {
         try
         {
-            characterController.setPlayerName(choiceStr);
+            characterController.setCharacterName(choiceStr);
             return true;
         }
         catch(CharacterControllerException e)
         {
             System.out.println(e.getMessage() + " - Please try again");
+            return false;
         }
-
-        return false;
     }
 
     /**

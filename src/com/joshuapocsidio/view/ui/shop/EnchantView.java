@@ -22,19 +22,19 @@ import java.util.Scanner;
 public class EnchantView extends MenuAction
 {
     /** EnchantView Fields **/
-    private final CharacterPlayer player;
+    private final CharacterPlayer character;
     private final EnchantmentDatabase enchantmentDatabase;
     private final ShopController shopController;
 
     /**
      * Constructor
      */
-    public EnchantView(CharacterPlayer player, EnchantmentDatabase enchantmentDatabase, ShopController shopController)
+    public EnchantView(CharacterPlayer character, EnchantmentDatabase enchantmentDatabase, ShopController shopController)
     {
         super();
         this.menuLabel = "Enchant Weapon(s)";
 
-        this.player = player;
+        this.character = character;
         this.enchantmentDatabase = enchantmentDatabase;
 
         this.shopController = shopController;
@@ -52,7 +52,7 @@ public class EnchantView extends MenuAction
         UserInterface ui = new UserInterface.Builder()
                 .withHeading("GAME SHOP")
                 .withSubHeading("Section - Enchant")
-                .withBody(player.getWeaponListString() + "\n0  -  Exit")
+                .withBody(character.getWeaponListString() + "\n0  -  Exit")
                 .withPrompt("MERCHANT : Which one would you like to enchant?")
                 .build();
 
@@ -80,7 +80,7 @@ public class EnchantView extends MenuAction
         try
         {
             // Get all weapons from player
-            List<WeaponItem> weapons = player.getWeapons();
+            List<WeaponItem> weapons = character.getWeapons();
             WeaponItem chosenWeapon = weapons.get(Integer.parseInt(choiceStr) - 1);
 
             // Show all available enchantment names
@@ -107,9 +107,8 @@ public class EnchantView extends MenuAction
         catch(InvalidShopActionException e)
         {
             System.out.println(e.getMessage());
+            return false;
         }
-
-        return false;
     }
 
     /**

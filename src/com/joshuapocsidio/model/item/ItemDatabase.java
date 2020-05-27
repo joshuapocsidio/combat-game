@@ -101,7 +101,6 @@ public class ItemDatabase
                 weapons.add(weapon);
             }
         }
-
         return weapons;
     }
 
@@ -118,8 +117,22 @@ public class ItemDatabase
                 armours.add(armour);
             }
         }
-
         return armours;
+    }
+
+    public List<PotionItem> getAllPotions()
+    {
+        List<PotionItem> potions = new LinkedList<>();
+
+        for(GameItem item : this.getAllItems())
+        {
+            if(item instanceof PotionItem)
+            {
+                PotionItem potion = (PotionItem) item;
+                potions.add(potion);
+            }
+        }
+        return potions;
     }
 
     public List<GameItem> getAllItems()
@@ -180,6 +193,34 @@ public class ItemDatabase
         }
         return cheapestArmour;
     }
+
+    /**
+     * Method for obtaining cheapest potion available from the database
+     * - places all cost available into a list and uses Collections.min() function
+     *
+     * RETURN
+     * - cheapestPotion     : PotionItem
+     */
+    public PotionItem getCheapestPotion()
+    {
+        PotionItem cheapestPotion = null;
+        List<Integer> costs = new LinkedList<>();
+
+        // Iterate through all weapons
+        for(PotionItem potion : this.getAllPotions())
+        {
+            // Add cost to list of costs
+            costs.add(potion.getCost());
+
+            // If this cost is the minimum, make it the cheapest
+            if(potion.getCost() == Collections.min(costs))
+            {
+                cheapestPotion = potion;
+            }
+        }
+        return cheapestPotion;
+    }
+
     @Override
     public String toString()
     {

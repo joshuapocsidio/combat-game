@@ -13,6 +13,7 @@ import com.joshuapocsidio.controller.factory.MenuFactory;
 import com.joshuapocsidio.model.enchantment.EnchantmentDatabase;
 import com.joshuapocsidio.model.item.ItemDatabase;
 import com.joshuapocsidio.model.player.character.CharacterPlayer;
+import com.joshuapocsidio.view.menu.MenuDirectory;
 
 public class CombatGame
 {
@@ -20,23 +21,21 @@ public class CombatGame
 
     public static void main(String[] args)
     {
-        /* Initialise shop database */
-        ItemDatabase itemDatabase = new ItemDatabase();
-
-        /* Initialise enchantment database */
-        EnchantmentDatabase enchantmentDatabase = new EnchantmentDatabase();
-        enchantmentDatabase.populateDefault();
-        /* Initialise factories */
-        final ItemFactory itemFactory = new ItemFactory();
-        final EnchantmentFactory enchantmentFactory = new EnchantmentFactory();
-        final EnemyFactory enemyFactory = new EnemyFactory();
-
         try
         {
+            /* Initialise factories */
+            final ItemFactory itemFactory = new ItemFactory();
+            final EnchantmentFactory enchantmentFactory = new EnchantmentFactory();
+            final EnemyFactory enemyFactory = new EnemyFactory();
+
+            /* Initialise databases */
+            ItemDatabase itemDatabase = new ItemDatabase();
+            EnchantmentDatabase enchantmentDatabase = new EnchantmentDatabase();
+            enchantmentDatabase.populateDefault();
             ItemDatabaseManager itemDatabaseManager = new ItemDatabaseManager(itemFactory, itemDatabase);
             itemDatabaseManager.populate(DEFAULT_ITEM_DATABASE);
 
-            /* Create Character */
+            /* Create Character with default weapon and armour */
             CharacterPlayer player = new CharacterPlayer(itemDatabase.getCheapestWeapon(), itemDatabase.getCheapestArmour());
 
             /* Create Controllers */
@@ -44,10 +43,13 @@ public class CombatGame
             ShopController shopController = new ShopController(player, enchantmentFactory);
             BattleController battleController = new BattleController(enemyFactory);
 
-            /* Initialize menu manager and show UI */
+            /* Initialize menu manager */
             MenuFactory menuFactory = new MenuFactory(player, itemDatabase, enchantmentDatabase, characterController, shopController, battleController);
             menuFactory.initialiseMenuTree();
-            menuFactory.showUI();
+
+            /* Get the root directory and display */
+            MenuDirectory root = menuFactory.getRoot();
+            root.show();
         }
         catch (InvalidItemDataSourceException e)
         {

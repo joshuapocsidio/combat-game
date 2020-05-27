@@ -19,18 +19,18 @@ import com.joshuapocsidio.view.ui.UserInterface;
 public class SellView extends MenuAction
 {
     /** SellView Fields **/
-    private final CharacterPlayer player;
+    private final CharacterPlayer character;
     private final ShopController shopController;
 
     /**
      * Constructor
      */
-    public SellView(CharacterPlayer player, ShopController shopController)
+    public SellView(CharacterPlayer character, ShopController shopController)
     {
         super();
         this.menuLabel = "Sell Item(s)";
 
-        this.player = player;
+        this.character = character;
         this.shopController = shopController;
     }
 
@@ -49,7 +49,7 @@ public class SellView extends MenuAction
         UserInterface ui = new UserInterface.Builder()
                 .withHeading("GAME SHOP")
                 .withSubHeading("Section - Sell")
-                .withBody(player.getItemListString() + "\n0  -  Exit")
+                .withBody(character.getItemListString() + "\n0  -  Exit")
                 .withPrompt("MERCHANT : Which one would you like to sell?")
                 .build();
 
@@ -75,7 +75,7 @@ public class SellView extends MenuAction
         try
         {
             // Get item from the player inventory
-            GameItem chosenItem = player.getItem(Integer.parseInt(choiceStr) - 1);
+            GameItem chosenItem = character.getItem(Integer.parseInt(choiceStr) - 1);
             // Sell item through the shop controller
             shopController.sell(chosenItem);
             return true;
@@ -109,7 +109,7 @@ public class SellView extends MenuAction
             int choice = Integer.parseInt(choiceStr);
 
             // Invalid if user is either negative or greater than the option list size
-            if(choice > player.getInventory().size() || choice < 0)
+            if(choice > character.getInventory().size() || choice < 0)
             {
                 System.out.print("Input is out of bounds! ");
                 return false;

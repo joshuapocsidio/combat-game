@@ -104,7 +104,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
      * - user is prompted to choose from (1) attack or (2) use potion
      * - choosing attack will pass the task to battleController
      * - choosing potion, the user will be prompted which potion to use
-     * - when a potion is chosen by user, task will be passed to the battleController
+     * - when a valid potion is chosen by user, task will be passed to the battleController
      * - in between turns, user is given an intermission and only goes ahead with the turn when a key is pressed
      * - the enemy will have its own turn after a key is pressed
      * - this process repeats until a player loses
@@ -129,6 +129,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
                 case 2: // Use Potion
                     if(!this.doPotionAction())
                     {
+                        // Potion action did not execute - looping back
                         return false;
                     }
                     break;
@@ -160,6 +161,8 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
 
     private boolean doPotionAction()
     {
+        boolean actionPotionSuccessful = true;
+
         // Get all items from player inventory
         List<PotionItem> potionItemList = characterPlayer.getPotions();
 
@@ -171,8 +174,9 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
 
             // Show user of available potions
             System.out.println(potionListString);
-            boolean potionDone = false;
 
+            // Loop until valid input
+            boolean potionDone = false;
             while(!potionDone)
             {
                 try
@@ -182,17 +186,19 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
 
                     if (potionChoice == 0)
                     {
+                        // User choice : EXIT
                         potionDone = true;
-                        return false;
+                        actionPotionSuccessful = false;
                     }
                     else if (potionChoice > 0 && potionChoice <= potionCount)
                     {
-                        // Attempt to user potion
+                        // User choice : VALID POTION
                         battleController.usePotion(characterPlayer, enemy, potionItemList.get(potionChoice - 1));
                         potionDone = true;
                     }
                     else
                     {
+                        // User choice : INVALID
                         System.out.println("Invalid potion choice - Please try again");
                     }
                 }
@@ -205,9 +211,10 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         else
         {
             System.out.println("You have no potions - Please try again");
-            return false;
+            actionPotionSuccessful = false;
         }
-        return true;
+
+        return actionPotionSuccessful;
     }
     /**
      * Method which defines what kind if user input is valid

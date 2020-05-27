@@ -49,7 +49,7 @@ public class ShopMenuDirectory extends MenuDirectory
                 .withHeading("GAME SHOP")
                 .withSubHeading("We have all the tools you need for everyday battles.")
                 .withBody(itemDatabase.getListString())
-                .withFooter(this.getMenuList())
+                .withFooter(this.getMenuListString())
                 .withPrompt("What would you like to do?")
                 .build();
 

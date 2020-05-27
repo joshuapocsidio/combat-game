@@ -6,41 +6,41 @@ import com.joshuapocsidio.model.player.character.CharacterPlayer;
 import com.joshuapocsidio.model.player.character.CharacterPlayerException;
 
 /**
- * Controller class for using player methods and functions
- * - set player name
+ * Controller class for using Character methods and functions
+ * - set Character name
  * - equip weapon/armour
  */
 public class CharacterController
 {
-    private final CharacterPlayer player;
+    private final CharacterPlayer character;
 
-    public CharacterController(CharacterPlayer player)
+    public CharacterController(CharacterPlayer character)
     {
-        if(player == null)
+        if(character == null)
         {
-            throw new IllegalArgumentException("Player cannot be null");
+            throw new IllegalArgumentException("Character cannot be null");
         }
 
-        this.player = player;
+        this.character = character;
     }
 
     /**
-     * Method to set the player name and checks validity of input name
+     * Method to set the Character name and checks validity of input name
      */
-    public void setPlayerName(String name) throws CharacterControllerException
+    public void setCharacterName(String name) throws CharacterControllerException
     {
         if(name.isEmpty() || name.isBlank())
         {
-            throw new CharacterControllerException("Player name must not be empty nor blank");
+            throw new CharacterControllerException("Character name must not be empty nor blank");
         }
 
         if(name.length() < 3)
         {
-            throw new CharacterControllerException("Player name must be at least 2 characters");
+            throw new CharacterControllerException("Character name must be at least 2 characters");
         }
 
-        // Set the player's name with input string
-        player.setName(name);
+        // Set the Character's name with input string
+        character.setName(name);
     }
 
     /**
@@ -53,7 +53,7 @@ public class CharacterController
         try
         {
             // Equip imported weapon
-            player.equipWeapon(weapon);
+            character.equipWeapon(weapon);
         }
         catch (CharacterPlayerException e)
         {
@@ -71,7 +71,7 @@ public class CharacterController
         try
         {
             // Equip imported armour
-            player.equipArmour(armour);
+            character.equipArmour(armour);
         }
         catch(CharacterPlayerException e)
         {

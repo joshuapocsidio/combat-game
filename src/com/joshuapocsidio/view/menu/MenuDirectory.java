@@ -21,7 +21,7 @@ public abstract class MenuDirectory implements MenuInterface
 
     /** MenuDirectory Fields **/
     protected String menuLabel;
-    private final List<MenuInterface> items = new LinkedList<>();
+    private final List<MenuInterface> menuList = new LinkedList<>();
     private boolean done;
 
     /** Template Method Hook to get specific output of specific MenuDirectory subclass */
@@ -47,6 +47,7 @@ public abstract class MenuDirectory implements MenuInterface
 
             // Loop until a valid input is provided
             boolean isValidInput = false;
+
             while(!isValidInput)
             {
                 // Get input from user
@@ -61,7 +62,7 @@ public abstract class MenuDirectory implements MenuInterface
                         isValidInput = true;
                         this.terminate();
                     }
-                    else if (choice > items.size()) // If user input is greater than the size of the MenuDirectory list
+                    else if (choice > menuList.size()) // If user input is greater than the size of the MenuDirectory list
                     {
                         System.out.println("Input out of bounds - Please try again");
                     }
@@ -70,12 +71,12 @@ public abstract class MenuDirectory implements MenuInterface
                         isValidInput = true;
 
                         // Call the specified menu interface
-                        items.get(choice - 1).show();
+                        menuList.get(choice - 1).show();
                     }
                 }
                 else
                 {
-                    System.out.println("Integer is required - Please try again");
+                    System.out.println("Positive integer is required - Please try again");
                 }
             }
         }
@@ -93,7 +94,7 @@ public abstract class MenuDirectory implements MenuInterface
     public void terminate()
     {
         // Iterates through the menu interfaces and terminate all underlying menu interfaces
-        for(MenuInterface item : items)
+        for(MenuInterface item : menuList)
         {
             item.terminate();
         }
@@ -112,7 +113,7 @@ public abstract class MenuDirectory implements MenuInterface
             throw new IllegalArgumentException("Menu interface must not be null");
         }
 
-        items.add(item);
+        menuList.add(item);
     }
 
     /**
@@ -120,12 +121,12 @@ public abstract class MenuDirectory implements MenuInterface
      */
     public void remove(MenuInterface item)
     {
-        if(!items.contains(item))
+        if(!menuList.contains(item))
         {
             throw new NoSuchElementException("Item does not exist under this menu tree");
         }
 
-        items.remove(item);
+        menuList.remove(item);
     }
 
     /**
@@ -161,13 +162,13 @@ public abstract class MenuDirectory implements MenuInterface
      *
      * NOTE - For simplicity, exit option is by default a 0
      */
-    protected String getMenuList()
+    protected String getMenuListString()
     {
         String list = "";
 
         int index = 1;
 
-        for(MenuInterface item : items)
+        for(MenuInterface item : menuList)
         {
             list += index + " - " + item.getMenuLabel() + "\n";
             index++;
@@ -176,5 +177,4 @@ public abstract class MenuDirectory implements MenuInterface
         list = list + "\n0 - Exit";
         return list;
     }
-
 }

@@ -6,4 +6,17 @@ public class Weapon extends WeaponItem
     {
         super(name, minEffect, maxEffect, cost, damageType, weaponType);
     }
+
+    /**
+     * Method for attacking function
+     * - currently, there is only one type of weapon. Therefore, this subclass uses the default implementation of strike
+     *
+     * RETURN
+     * - damage blocked : int
+     */
+    @Override
+    public int strike()
+    {
+        return this.calculateEffect();
+    }
 }

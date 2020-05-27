@@ -5,7 +5,7 @@ import com.joshuapocsidio.controller.factory.ItemFactory;
 import com.joshuapocsidio.model.item.GameItem;
 import com.joshuapocsidio.model.item.InvalidItemDatabaseException;
 import com.joshuapocsidio.model.item.ItemDatabase;
-import com.joshuapocsidio.model.item.AddNewItemListener;
+import com.joshuapocsidio.model.item.ItemDatabaseChangeObserver;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 /**
  * I/O class responsible for parsing items from external source
  */
-public class ItemDatabaseManager implements AddNewItemListener
+public class ItemDatabaseManager implements ItemDatabaseChangeObserver
 {
     private final ItemFactory itemFactory;
     private final ItemDatabase itemDatabase;
@@ -30,7 +30,7 @@ public class ItemDatabaseManager implements AddNewItemListener
 
         if(itemDatabase == null)
         {
-            throw new IllegalArgumentException("Item database must be initialise");
+            throw new IllegalArgumentException("Item database must be initialised");
         }
 
         this.itemFactory = itemFactory;
@@ -114,13 +114,13 @@ public class ItemDatabaseManager implements AddNewItemListener
     /**
      * Observer method for creating new item based on input parameters for future use
      *
-     * For example, if other external database(s) want to add item data to the current game,
-     * it can implement ItemDatabaseChangeListener to update and pass desired item(s)
+     * For example, if an alternate source of shop item data is to be added, simply attach this as an observer
+     * from the main to the subject class
      */
     @Override
-    public void createNewItem(String type, String name, int minEffect, int maxEffect, int cost, String[] attributes)
+    public void addNewItem(String type, String name, int minEffect, int maxEffect, int cost, String[] attributes)
     {
-        GameItem newItem = null;
+        GameItem newItem;
         try
         {
             newItem = itemFactory.createItem(type, name, minEffect, maxEffect, cost, attributes);
@@ -134,5 +134,17 @@ public class ItemDatabaseManager implements AddNewItemListener
         {
             // TODO : LOG THE ITEM IN ERROR LOG
         }
+    }
+
+    /**
+     * Observer method for creating new item based on a single line string entry for future use
+     *
+     * For example, if an alternate source of shop item data is to be added, simply attach this as an observer
+     * from the main to the subject class
+     */
+    @Override
+    public void addNew(String dataEntry)
+    {
+        this.processLine(dataEntry);
     }
 }

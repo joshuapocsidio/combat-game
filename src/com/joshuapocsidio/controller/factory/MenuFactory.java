@@ -33,6 +33,7 @@ import com.joshuapocsidio.view.ui.shop.ShopMenuDirectory;
  */
 public class MenuFactory
 {
+    // Root directory
     private MenuDirectory root;
 
     // Models
@@ -134,13 +135,19 @@ public class MenuFactory
      * Method for launching and outputting the visual
      * user interface
      */
-    public void showUI() throws InvalidMenuFactoryException
+    public void showView() throws InvalidMenuFactoryException
     {
         if(root == null)
         {
             throw new InvalidMenuFactoryException("Root menu needs to be initialised");
         }
         root.show();
+    }
+
+    /** ACCESSOR */
+    public MenuDirectory getRoot()
+    {
+        return this.root;
     }
 
 }
