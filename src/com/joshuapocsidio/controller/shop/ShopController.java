@@ -107,7 +107,7 @@ public class ShopController
             throw new InvalidShopActionException("Weapon cannot be null");
         }
 
-        if(enchantmentName.isEmpty() || enchantmentName.isBlank())
+        if(enchantmentName.isEmpty() || enchantmentName == null )
         {
             throw new InvalidShopActionException("Enchantment name cannot be empty nor blank");
         }

@@ -29,7 +29,7 @@ public class CharacterController
      */
     public void setCharacterName(String name) throws CharacterControllerException
     {
-        if(name.isEmpty() || name.isBlank())
+        if(name.isEmpty() || name == null )
         {
             throw new CharacterControllerException("Character name must not be empty nor blank");
         }

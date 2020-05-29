@@ -58,7 +58,7 @@ public class EnchantmentDatabase
     public void add(String enchantmentName, int cost) throws InvalidEnchantmentException
     {
         // Checks if enchantment name is valid
-        if(enchantmentName.isEmpty() || enchantmentName.isBlank())
+        if(enchantmentName.isEmpty() || enchantmentName == null )
         {
             throw new InvalidEnchantmentException("Enchantment name cannot be empty nor blank");
         }

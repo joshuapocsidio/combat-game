@@ -22,7 +22,7 @@ public class ItemFactory
     public GameItem createItem(String type, String name, int minEffect, int maxEffect, int cost, String[] attributes) throws InvalidItemFactoryException
     {
         //Check for invalid parameters
-        if(name.isBlank() || name.isEmpty())
+        if(name == null || name.isEmpty())
         {
             throw new InvalidItemFactoryException("Name cannot be blank nor empty");
         }
@@ -47,7 +47,7 @@ public class ItemFactory
             throw new InvalidItemFactoryException("Minimum effect cannot be greater than the maximum effect");
         }
 
-        if (type.isEmpty() || type.isBlank())
+        if (type.isEmpty() || type == null )
         {
             throw new InvalidItemFactoryException("Item type must not be null");
         }
@@ -81,12 +81,12 @@ public class ItemFactory
      */
     private WeaponItem createWeapon(String name, int minEffect, int maxEffect, int cost, String damageType, String weaponType) throws InvalidItemFactoryException
     {
-        if(damageType.isEmpty() || damageType.isBlank())
+        if(damageType.isEmpty() || damageType == null )
         {
             throw new InvalidItemFactoryException("Damage type must not be empty nor blank");
         }
 
-        if(weaponType.isEmpty() || damageType.isBlank())
+        if(weaponType.isEmpty() || damageType == null )
         {
             throw new InvalidItemFactoryException("Weapon type must not be empty nor blank");
         }
@@ -99,7 +99,7 @@ public class ItemFactory
      */
     private ArmourItem createArmour(String name, int minEffect, int maxEffect, int cost, String materialType) throws InvalidItemFactoryException
     {
-        if(materialType.isEmpty() || materialType.isBlank())
+        if(materialType.isEmpty() || materialType == null )
         {
             throw new InvalidItemFactoryException("Material type must not be empty nor blank");
         }
@@ -112,7 +112,7 @@ public class ItemFactory
      */
     private PotionItem createPotion(String name, int minEffect, int maxEffect, int cost, String potionType) throws InvalidItemFactoryException
     {
-        if(potionType.isBlank() || potionType.isEmpty())
+        if(potionType == null || potionType.isEmpty())
         {
             throw new InvalidItemFactoryException("Potion type must not be empty nor blank");
         }

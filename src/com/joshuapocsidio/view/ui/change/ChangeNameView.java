@@ -98,7 +98,7 @@ public class ChangeNameView extends MenuAction
     protected boolean isValid(String choiceStr)
     {
         // Invalid if user input string is blank, null, or empty
-        return !choiceStr.isEmpty() && !choiceStr.isBlank();
+        return !choiceStr.isEmpty() && choiceStr != null ;
     }
 
 }

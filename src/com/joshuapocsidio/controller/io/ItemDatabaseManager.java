@@ -42,7 +42,7 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
      */
     public void populate(String fileName) throws InvalidItemDataSourceException
     {
-        if(fileName.isBlank() || fileName.isEmpty())
+        if(fileName == null || fileName.isEmpty())
         {
             throw new InvalidItemDataSourceException("File name parameter cannot be empty nor blank");
         }
