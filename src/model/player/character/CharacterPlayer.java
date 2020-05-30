@@ -208,7 +208,16 @@ public class CharacterPlayer extends CombatPlayer
      */
     public boolean hasItem(GameItem item)
     {
-        return inventory.contains(item);
+        boolean has = false;
+
+        for(GameItem checkItem : inventory)
+        {
+            if(checkItem.equals(item))
+            {
+                has =  true;
+            }
+        }
+        return has;
     }
 
     /** ACCESSORS */
@@ -243,7 +252,7 @@ public class CharacterPlayer extends CombatPlayer
         }
         else
         {
-            throw new CharacterPlayerException("Item does not exist in inventory"); // TODO : Update the cause of this exception
+            throw new CharacterPlayerException("Item does not exist in inventory");
         }
     }
 
@@ -522,7 +531,6 @@ public class CharacterPlayer extends CombatPlayer
     public void removePotionUseObserver(PotionUseObserver potionUseObserver)
     {
         potionUseObservers.remove(potionUseObserver);
-        // TODO : Throw exception if battle obs does not exist
     }
 
     public void notifyPotionUseObservers(String name)
@@ -544,7 +552,6 @@ public class CharacterPlayer extends CombatPlayer
     public void removeGameOverObserver(GameOverObserver gameOverObserver)
     {
         gameOverObservers.remove(gameOverObserver);
-        // TODO : Throw exception if battle obs does not exist
     }
 
     public void notifyGameOverObservers()

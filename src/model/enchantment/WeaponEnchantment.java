@@ -133,8 +133,6 @@ public abstract class WeaponEnchantment extends WeaponItem
 
     /**
      * Method for comparing weapons - with and without enchantments
-     *
-     * TODO : Implement better comparison
      */
     public boolean equals(WeaponItem weapon)
     {

@@ -160,7 +160,6 @@ public abstract class EnemyPlayer extends CombatPlayer
     public void removeSpecialAbilityObserver(SpecialAbilityObserver specialAbilityObserver)
     {
         specialAbilityObservers.remove(specialAbilityObserver);
-        // TODO : Throw exception if battle obs does not exist
     }
 
     public void notifySpecialAbilityObservers(String description)

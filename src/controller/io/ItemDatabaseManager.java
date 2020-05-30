@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 /**
  * I/O class responsible for parsing items from external source
@@ -20,6 +21,7 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
 {
     private final ItemFactory itemFactory;
     private final ItemDatabase itemDatabase;
+    private final Logger logger = ErrorLogger.getInstance().createLogger(ItemDatabaseManager.class.getName());
 
     public ItemDatabaseManager(ItemFactory itemFactory, ItemDatabase itemDatabase)
     {
@@ -42,11 +44,16 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
      */
     public void populate(String fileName) throws InvalidItemDataSourceException
     {
-        if(fileName == null || fileName.isEmpty())
+        // Do not want to have the logger output warnings to user
+        logger.setUseParentHandlers(false);
+
+        if(fileName.isEmpty())
         {
             throw new InvalidItemDataSourceException("File name parameter cannot be empty nor blank");
         }
 
+        // Inner try catch are for warnings - only log the errors and continue
+        // Outer try catch is for fatal exception - program should not proceed
         try
         {
             File file = new File(fileName);
@@ -59,13 +66,22 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
                 /* Ignore Blank Lines - trim() removes leading and trailing spaces */
                 if(line.trim().length() > 0)
                 {
-                    this.processLine(line);
+                    try
+                    {
+                        this.processLine(line);
+                    }
+                    catch (ItemManagerException e)
+                    {
+                        // Item is not valid item - therefore must be a warning in error.log and continue without crashing
+                        logger.warning(e.getMessage() + "\n**Moving on without parsing this line\n");
+                    }
                 }
                 line = bfrReader.readLine();
             }
         }
         catch(IOException e)
         {
+            // Fatal exception - let main handle
             throw new InvalidItemDataSourceException("Unable to read file - Please check integrity of file", e);
         }
     }
@@ -73,42 +89,39 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
     /**
      * Method for processing each line of a text file
      */
-    private void processLine(String line)
+    private void processLine(String line) throws ItemManagerException
     {
+        // Attempt to create item
+
         /* Split parameters */
         String[] parameters = line.split(",");
+        if(parameters.length < 6)
+        {
+            // Item already exists in database - therefore only as info and can be ignored
+            throw new ItemManagerException("Item input from data cannot be parsed - not enough information");
+        }
 
-        /* Obtain common parameters */
-        String itemType = parameters[0].trim();
-        /* Remove leading whitespace from name*/
-        String itemName = parameters[1].trim();
-        /* Remove all whitespace from numerical parameters*/
-        int itemMin = Integer.parseInt(parameters[2].replaceAll("\\s", ""));
-        int itemMax = Integer.parseInt(parameters[3].replaceAll("\\s", ""));
-        int itemCost = Integer.parseInt(parameters[4].replaceAll("\\s", ""));
-
-        // Create copy of the attribute array
-        String[] attributes = Arrays.copyOfRange(parameters, 5, parameters.length);
-
-        // Attempt to create item
         try
         {
-            GameItem newItem = itemFactory.createItem(itemType, itemName, itemMin, itemMax, itemCost, attributes);
-            itemDatabase.addItem(newItem);
-        }
-        catch(InvalidItemDatabaseException e)
-        {
-            // TODO : LOG THE ITEM in ERROR LOG
-        }
-        catch(InvalidItemFactoryException e)
-        {
-            // TODO : LOG THE ITEM in ERROR LOG
-        }
-        catch(IllegalArgumentException e)
-        {
-            // TODO : LOG THE ITEM IN ERROR LOG
-        }
+            /* Obtain common parameters */
+            String itemType = parameters[0].trim();
+            /* Remove leading whitespace from name*/
+            String itemName = parameters[1].trim();
+            /* Remove all whitespace from numerical parameters*/
+            int itemMin = Integer.parseInt(parameters[2].replaceAll("\\s", ""));
+            int itemMax = Integer.parseInt(parameters[3].replaceAll("\\s", ""));
+            int itemCost = Integer.parseInt(parameters[4].replaceAll("\\s", ""));
+            // Create copy of the attribute array
+            String[] attributes = Arrays.copyOfRange(parameters, 5, parameters.length);
 
+            // Create and Add new item
+            this.addNewItem(itemType, itemName, itemMin, itemMax, itemCost, attributes);
+        }
+        catch(NumberFormatException e)
+        {
+            // If Integer.parseInt() fails...
+            throw new ItemManagerException("Integer parameters cannot be parsed : minEffect, maxEffect, and/or cost");
+        }
     }
 
     /**
@@ -124,15 +137,20 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
         try
         {
             newItem = itemFactory.createItem(type, name, minEffect, maxEffect, cost, attributes);
-            itemDatabase.addItem(newItem);
+            if(newItem != null)
+            {
+                itemDatabase.addItem(newItem);
+            }
         }
         catch (InvalidItemFactoryException e)
         {
-            // TODO : LOG THE ITEM IN ERROR LOG
+            // Item already exists in database - therefore only as info and can be ignored
+            logger.info("Attempted to add item to database but received error : " + e.getMessage() + "\n");
         }
         catch (InvalidItemDatabaseException e)
         {
-            // TODO : LOG THE ITEM IN ERROR LOG
+            // Item is not valid item - therefore must be a warning in error.log
+            logger.warning("Attempted to create an item in factory but received error : " + e.getMessage() + "\n");
         }
     }
 
@@ -145,6 +163,14 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
     @Override
     public void addNew(String dataEntry)
     {
-        this.processLine(dataEntry);
+        try
+        {
+            this.processLine(dataEntry);
+        }
+        catch (ItemManagerException e)
+        {
+            // Item is not valid item - therefore must be a warning in error.log
+            logger.warning(e.getMessage() + "\n**Moving on without parsing this line\n");
+        }
     }
 }

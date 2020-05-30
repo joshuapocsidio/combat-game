@@ -44,9 +44,12 @@ public class ItemDatabase
         }
 
         // Checks if database already contains the item data
-        if(itemList.contains(item))
+        for(GameItem checkItem : itemList)
         {
-            throw new InvalidItemDatabaseException("Item already exists in database");
+            if(checkItem.equals(item))
+            {
+                throw new InvalidItemDatabaseException("Item already exists in database");
+            }
         }
 
         // Updates database
@@ -249,7 +252,7 @@ public class ItemDatabase
         {
             String info = item.toString();
 
-            out = out + index + "  -  " +info+ "\n";
+            out += index + "  -  " +info+ "\n";
 
             index++;
         }

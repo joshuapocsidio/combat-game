@@ -71,9 +71,13 @@ public class BattleController
     public void givePlayerRewards(CharacterPlayer character, CombatPlayer enemy)
     {
         /* Give gold reward */
-        character.setGold(character.getGold() + enemy.getGold());
+        double currentGold = character.getGold();
+        double goldReward = enemy.getGold();
+        character.setGold(currentGold + goldReward);
 
-        /* Give health reward */ // TODO : COMMENT ON THIS
-        character.setHealth((int)((double)character.getHealth() * 1.5));
+        /* Give health reward */
+        int currentHealth = character.getHealth();
+        double healthReward = (double)currentHealth * 1.5;
+        character.setHealth((int)healthReward); // Reverted back to int since CombatPlayer setHealth() expects integer
     }
 }

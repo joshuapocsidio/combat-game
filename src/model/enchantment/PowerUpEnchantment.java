@@ -27,6 +27,6 @@ public class PowerUpEnchantment extends WeaponEnchantment
     public int strike()
     {
         // Multiplies total damage by 1.1
-        return (int)(next.strike() * 1.1); // TODO : Change all damage to double to accommodate for this
+        return (int)(next.strike() * 1.1);
     }
 }

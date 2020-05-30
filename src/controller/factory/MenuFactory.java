@@ -129,19 +129,7 @@ public class MenuFactory
         shop.add(buy);
         shop.add(sell);
         shop.add(enchant);
-    }
 
-    /**
-     * Method for launching and outputting the visual
-     * user interface
-     */
-    public void showView() throws InvalidMenuFactoryException
-    {
-        if(root == null)
-        {
-            throw new InvalidMenuFactoryException("Root menu needs to be initialised");
-        }
-        root.show();
     }
 
     /** ACCESSOR */
