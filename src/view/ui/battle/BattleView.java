@@ -115,8 +115,8 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
     @Override
     protected boolean doAction(String choiceStr)
     {
-        // Only continue if battle is not over
-        if(!battleOver)
+        /* Character's Turn */
+        if(!battleOver) // Only continue if battle is not over
         {
             // Get user input
             int choice = Integer.parseInt(choiceStr);
@@ -146,8 +146,8 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         // Intermission to allow user to read and understand the flow/pace of the game
         this.pressAnyKeyToContinue();
 
-        // Only continue if battle is not over
-        if(!battleOver)
+        /* Enemy's Turn */
+        if(!battleOver) // Only continue if battle is not over
         {
             battleController.fight(enemy, characterPlayer); // enemy attacks player
         }

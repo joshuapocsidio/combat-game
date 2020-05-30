@@ -68,7 +68,6 @@ public abstract class MenuAction implements MenuInterface
             {
                 // Get input from user
                 String choiceStr = input.nextLine();
-
                 // What is valid is defined by subclass
                 isValidInput = this.isValid(choiceStr);
 
