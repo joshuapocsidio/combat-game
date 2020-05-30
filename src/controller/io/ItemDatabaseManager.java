@@ -73,7 +73,7 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
                     catch (ItemManagerException e)
                     {
                         // Item is not valid item - therefore must be a warning in error.log and continue without crashing
-                        logger.warning(e.getMessage() + "\n**Moving on without parsing this line\n");
+                        logger.warning(e.getMessage() + "\n * * Moving on without parsing this line\n");
                     }
                 }
                 line = bfrReader.readLine();
@@ -145,12 +145,12 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
         catch (InvalidItemFactoryException e)
         {
             // Item already exists in database - therefore only as info and can be ignored
-            logger.info("Attempted to add item to database but received error : " + e.getMessage() + "\n");
+            logger.info("Attempted to add item to database but received error : " + e.getMessage() + "\n * * Moving on without parsing this line\n");
         }
         catch (InvalidItemDatabaseException e)
         {
             // Item is not valid item - therefore must be a warning in error.log
-            logger.warning("Attempted to create an item in factory but received error : " + e.getMessage() + "\n");
+            logger.warning("Attempted to create an item in factory but received error : " + e.getMessage() + "\n * * Moving on without parsing this line\n");
         }
     }
 

@@ -1,7 +1,7 @@
 package view.ui.shop;
 
-import controller.shop.ShopController;
 import controller.shop.InvalidShopActionException;
+import controller.shop.ShopController;
 import model.item.GameItem;
 import model.player.character.CharacterPlayer;
 import model.player.character.CharacterPlayerException;

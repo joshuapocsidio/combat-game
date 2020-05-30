@@ -4,7 +4,9 @@ import model.item.armour.ArmourItem;
 import model.item.potion.PotionItem;
 import model.item.weapon.WeaponItem;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Model class for ItemDatabase

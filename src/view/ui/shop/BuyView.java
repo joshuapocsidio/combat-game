@@ -1,10 +1,10 @@
 package view.ui.shop;
 
-import controller.shop.ShopController;
 import controller.shop.InvalidShopActionException;
+import controller.shop.ShopController;
 import model.item.GameItem;
-import model.item.ItemDatabase;
 import model.item.InvalidItemDatabaseException;
+import model.item.ItemDatabase;
 import view.menu.MenuAction;
 import view.ui.UserInterface;
 

@@ -1,7 +1,6 @@
 package controller.factory;
 
 import controller.io.ErrorLogger;
-import controller.io.ItemDatabaseManager;
 import model.item.GameItem;
 import model.item.armour.ArmourItem;
 import model.item.potion.DamagePotion;

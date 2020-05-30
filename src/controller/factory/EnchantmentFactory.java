@@ -1,6 +1,9 @@
 package controller.factory;
 
-import model.enchantment.*;
+import model.enchantment.DamageEnchantmentA;
+import model.enchantment.DamageEnchantmentB;
+import model.enchantment.FireEnchantment;
+import model.enchantment.PowerUpEnchantment;
 import model.item.weapon.WeaponItem;
 
 /**

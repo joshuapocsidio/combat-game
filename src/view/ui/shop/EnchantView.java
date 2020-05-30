@@ -1,7 +1,7 @@
 package view.ui.shop;
 
-import controller.shop.ShopController;
 import controller.shop.InvalidShopActionException;
+import controller.shop.ShopController;
 import model.enchantment.EnchantmentDatabase;
 import model.item.weapon.WeaponItem;
 import model.player.character.CharacterPlayer;

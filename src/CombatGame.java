@@ -1,14 +1,10 @@
 import controller.battle.BattleController;
-import controller.factory.EnchantmentFactory;
-import controller.factory.EnemyFactory;
-import controller.factory.ItemFactory;
+import controller.factory.*;
 import controller.io.ErrorLogger;
 import controller.io.InvalidItemDataSourceException;
 import controller.io.ItemDatabaseManager;
 import controller.player.CharacterController;
 import controller.shop.ShopController;
-import controller.factory.InvalidMenuFactoryException;
-import controller.factory.MenuFactory;
 import model.enchantment.EnchantmentDatabase;
 import model.item.ItemDatabase;
 import model.item.armour.ArmourItem;
