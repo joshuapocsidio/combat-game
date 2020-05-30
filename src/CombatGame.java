@@ -67,6 +67,9 @@ public class CombatGame
             /* Get the root directory and display */
             MenuDirectory root = menuFactory.getRoot();
             root.show();
+
+            /* Close file handler */
+            fileHandler.close();
         }
         catch (InvalidItemDataSourceException | InvalidMenuFactoryException | IOException | IllegalArgumentException e)
         {

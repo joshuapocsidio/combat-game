@@ -1,0 +1,24 @@
+May 31, 2020 3:13:00 AM controller.io.ItemDatabaseManager populate
+WARNING: Integer parameters cannot be parsed : minEffect, maxEffect, and/or cost
+**Moving on without parsing this line
+
+May 31, 2020 3:13:00 AM controller.io.ItemDatabaseManager populate
+WARNING: Integer parameters cannot be parsed : minEffect, maxEffect, and/or cost
+**Moving on without parsing this line
+
+May 31, 2020 3:13:00 AM controller.io.ItemDatabaseManager populate
+WARNING: Integer parameters cannot be parsed : minEffect, maxEffect, and/or cost
+**Moving on without parsing this line
+
+May 31, 2020 3:13:00 AM controller.io.ItemDatabaseManager addNewItem
+INFO: Attempted to add item to database but received error : Item Name - Explosive Potion
+ - Item Type cannot be recognised
+
+May 31, 2020 3:13:00 AM controller.io.ItemDatabaseManager populate
+WARNING: Item input from data cannot be parsed - not enough information
+**Moving on without parsing this line
+
+May 31, 2020 3:13:00 AM controller.io.ItemDatabaseManager populate
+WARNING: Item input from data cannot be parsed - not enough information
+**Moving on without parsing this line
+
