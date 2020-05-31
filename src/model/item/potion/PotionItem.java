@@ -18,6 +18,11 @@ public abstract class PotionItem extends GameItem
         super(name, minEffect, maxEffect, cost);
     }
 
+    public PotionItem(PotionItem potion)
+    {
+        super(potion.getName(), potion.getMinEffect(), potion.getMaxEffect(), potion.getCost());
+    }
+
     /**
      * Method for using potions.
      * - Calls parent class' calculate effect method to create a randomized effect

@@ -1,10 +1,17 @@
 package model.item.weapon;
 
+import model.item.GameItem;
+
 public class Weapon extends WeaponItem
 {
     public Weapon(String name, int minEffect, int maxEffect, int cost, String damageType, String weaponType)
     {
         super(name, minEffect, maxEffect, cost, damageType, weaponType);
+    }
+
+    public Weapon(Weapon weapon)
+    {
+        super(weapon.getName(), weapon.getMinEffect(), weapon.getMaxEffect(), weapon.getCost(), weapon.getDamageType(), weapon.getWeaponType());
     }
 
     /**
@@ -18,5 +25,11 @@ public class Weapon extends WeaponItem
     public int strike()
     {
         return this.calculateEffect();
+    }
+
+    @Override
+    public GameItem clone()
+    {
+        return new Weapon(this);
     }
 }

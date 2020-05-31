@@ -1,5 +1,6 @@
 package model.item.potion;
 
+import model.item.GameItem;
 import model.player.character.CharacterPlayer;
 
 /**
@@ -10,9 +11,19 @@ import model.player.character.CharacterPlayer;
  */
 public class DamagePotion extends PotionItem
 {
+    @Override
+    public GameItem clone() {
+        return new DamagePotion(this);
+    }
+
     public DamagePotion(String name, int minEffect, int maxEffect, int cost)
     {
         super(name, minEffect, maxEffect, cost);
+    }
+
+    public DamagePotion(DamagePotion potion)
+    {
+        super(potion.getName(), potion.getMinEffect(), potion.getMaxEffect(), potion.getCost());
     }
 
     /**

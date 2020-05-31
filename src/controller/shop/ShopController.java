@@ -54,10 +54,12 @@ public class ShopController
             throw new InvalidShopActionException("Not enough gold");
         }
 
+        GameItem boughtItem = item.clone();
+        System.out.println(boughtItem.toString());
         // Update character's gold based on cost of purchase
         character.setGold(character.getGold() - cost);
         // Add to inventory newly bought item
-        character.addToInventory(item);
+        character.addToInventory(boughtItem);
     }
 
     /**
@@ -128,12 +130,11 @@ public class ShopController
         {
             // Create weapon from factory
             WeaponItem enchantedWeapon = enchantmentFactory.enchantWeapon(weapon, enchantmentName);
-
             // Add to inventory before checking
             character.addToInventory(enchantedWeapon);
 
             // Check if weapon is currently equipped
-            if(character.getEquippedWeapon().equals(weapon))
+            if(character.getEquippedWeapon().isIdentical(weapon))
             {
                 // If it is equipped, replace with new enchanted weapon
                 character.equipWeapon(enchantedWeapon);

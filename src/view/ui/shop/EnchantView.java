@@ -102,6 +102,8 @@ public class EnchantView extends MenuAction
 
             // Pass enchanting task to controller with the weapon, name, and cost
             shopController.enchant(chosenWeapon, enchantmentName, enchantmentCost);
+
+            System.out.println("Enchantment Successful!");
             return true;
         }
         catch(InvalidShopActionException e)

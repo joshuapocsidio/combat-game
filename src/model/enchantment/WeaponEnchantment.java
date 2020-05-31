@@ -1,5 +1,6 @@
 package model.enchantment;
 
+import model.item.GameItem;
 import model.item.weapon.WeaponItem;
 
 /**
@@ -137,5 +138,11 @@ public abstract class WeaponEnchantment extends WeaponItem
     public boolean equals(WeaponItem weapon)
     {
         return weapon.toString().equals(this.toString());
+    }
+
+    @Override
+    public GameItem clone()
+    {
+        return next.clone();
     }
 }

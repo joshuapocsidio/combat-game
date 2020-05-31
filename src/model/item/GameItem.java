@@ -1,5 +1,6 @@
 package model.item;
 
+
 import java.util.Random;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Random;
  */
 public abstract class GameItem
 {
+    public abstract GameItem clone();
     private String name;
     private int cost;
     private int maxEffect;
@@ -25,6 +27,14 @@ public abstract class GameItem
         this.cost = cost;
         this.minEffect = minEffect;
         this.maxEffect = maxEffect;
+    }
+
+    public GameItem(GameItem item)
+    {
+        this.name = item.getName();
+        this.cost = item.getCost();
+        this.maxEffect = item.getMaxEffect();
+        this.minEffect = item.getMinEffect();
     }
 
     /** ACCESSORS */
@@ -130,15 +140,48 @@ public abstract class GameItem
     }
 
     /**
-     * Equals method for comparison
+     * Equals method for comparison - checks if items are identical items regardless if duplicate item
+     * - Useful when looking to prevent duplication in a set
      *
-     * TODO : Implement better comparison algorithm
+     * e.g. Explosive Potion (1) ... == ExplosivePotion...
+     * This will return TRUE
      */
     public boolean equals(GameItem item)
     {
-        return item.toString().equals(this.toString());
+        // Get name of both items
+        String thisName = this.getName();
+        String itemName = item.getName();
+
+        // Obtain name without the duplicate marker "(%d)"
+        String thisNameWithoutDuplicateMarker = thisName.split("[(]")[0].trim();
+        String itemNameWithoutDuplicateMarker = itemName.split("[(]")[0].trim();
+
+        // Temporarily set the names of both items to be the name without duplicate markers
+        this.setName(thisNameWithoutDuplicateMarker);
+        item.setName(itemNameWithoutDuplicateMarker);
+
+        // Call isIdentical
+        boolean identical = this.isIdentical(item);
+
+        // Reset the names back to original names
+        this.setName(thisName);
+        item.setName(itemName);
+
+        return identical;
     }
 
+    /**
+     * Method for checking if items are identical
+     * - Useful when duplicates found
+     * - Will return true if, and only if, items are of the same object
+     *
+     * e.g. Potion Item (1)... = Potion Item(1)....
+     * This will RETURN TRUE, FALSE otherwise
+     */
+    public boolean isIdentical(GameItem item)
+    {
+        return this.toString().equals(item.toString());
+    }
 
 }
 

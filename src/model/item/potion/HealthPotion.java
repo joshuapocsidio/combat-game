@@ -1,5 +1,6 @@
 package model.item.potion;
 
+import model.item.GameItem;
 import model.player.character.CharacterPlayer;
 
 /**
@@ -10,11 +11,21 @@ import model.player.character.CharacterPlayer;
  */
 public class HealthPotion extends PotionItem
 {
+    @Override
+    public GameItem clone()
+    {
+        return new HealthPotion(this);
+    }
+
     public HealthPotion(String name, int minEffect, int maxEffect, int cost)
     {
         super(name, minEffect, maxEffect, cost);
     }
 
+    public HealthPotion(HealthPotion potion)
+    {
+        super(potion.getName(), potion.getMinEffect(), potion.getMaxEffect(), potion.getCost());
+    }
     /**
      * Template hook method for health potion specific functionality.
      * Increases player health by calculated base effect and returns

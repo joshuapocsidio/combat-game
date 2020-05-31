@@ -78,6 +78,8 @@ public class BuyView extends MenuAction
             GameItem chosenItem = itemDatabase.getItem(Integer.parseInt(choiceStr) - 1);
             // Buy item through shop controller
             shopController.buy(chosenItem);
+
+            System.out.println("Purchase Successful!");
             return true;
         }
         catch(InvalidShopActionException e)

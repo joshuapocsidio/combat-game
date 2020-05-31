@@ -45,19 +45,16 @@ public class ItemDatabase
             throw new InvalidItemDatabaseException("Item cannot be null");
         }
 
-        // Checks if database already contains the item data
-        for(GameItem checkItem : itemList)
+        if(this.contains(item))
         {
-            if(checkItem.equals(item))
-            {
-                throw new InvalidItemDatabaseException("Item already exists in database");
-            }
+            throw new InvalidItemDatabaseException("Item already exists in database");
         }
 
         // Updates database
         itemList.add(item);
         itemCount++;
     }
+
 
     /**
      * Method for removing items from database
@@ -224,6 +221,23 @@ public class ItemDatabase
             }
         }
         return cheapestPotion;
+    }
+
+    /**
+     * Method for checking if database contains imported item
+     * - trims out the duplicate markers (if applicable) and uses that for comparison
+     */
+    public boolean contains(GameItem item)
+    {
+        for(GameItem checkItem : itemList)
+        {
+            if(checkItem.equals(item))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

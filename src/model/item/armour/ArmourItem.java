@@ -19,6 +19,13 @@ public class ArmourItem extends GameItem
         this.materialType = materialType;
     }
 
+    public ArmourItem(ArmourItem armour)
+    {
+        super(armour.getName(), armour.getMinEffect(), armour.getMaxEffect(), armour.getCost());
+
+        this.materialType = armour.getMaterialType();
+    }
+
     /**
      * Method for blocking function
      * - there is only one type of armour and therefore only uses calculate effect from parent class
@@ -41,6 +48,12 @@ public class ArmourItem extends GameItem
     public void setMaterialType(String materialType)
     {
         this.materialType = materialType;
+    }
+
+    @Override
+    public GameItem clone()
+    {
+        return new ArmourItem(this);
     }
 
     /**

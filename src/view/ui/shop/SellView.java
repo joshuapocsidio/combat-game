@@ -78,6 +78,8 @@ public class SellView extends MenuAction
             GameItem chosenItem = character.getItem(Integer.parseInt(choiceStr) - 1);
             // Sell item through the shop controller
             shopController.sell(chosenItem);
+
+            System.out.println("Sale Successful!");
             return true;
         }
         catch(InvalidShopActionException e)

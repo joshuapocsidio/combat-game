@@ -310,6 +310,20 @@ public class CharacterPlayer extends CombatPlayer
             throw new IllegalArgumentException("Item cannot be null");
         }
 
+        int numDuplicate = 0;
+        for(GameItem checkItem : inventory)
+        {
+            if(checkItem.equals(item))
+            {
+                System.out.println("FOUND DUP");
+                numDuplicate++;
+            }
+        }
+        if(numDuplicate != 0)
+        {
+            item.setName(item.getName() + " (" + numDuplicate+ ")");
+        }
+
         inventory.add(item);
     }
 
@@ -335,7 +349,7 @@ public class CharacterPlayer extends CombatPlayer
         while(!found && i < inventory.size())
         {
             // Check if item matches
-            if (item.equals(inventory.get(i)))
+            if (item.toString().equals(inventory.get(i).toString()))
             {
                 // Only check further if current index does not match equipped armour and equipped weapon index
                 if(i != equippedArmourIndex && i != equippedWeaponIndex)

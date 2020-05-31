@@ -22,6 +22,14 @@ public abstract class WeaponItem extends GameItem
         this.weaponType = weaponType;
     }
 
+    public WeaponItem(WeaponItem weapon)
+    {
+        super(weapon.getName(), weapon.getMinEffect(), weapon.getMaxEffect(), weapon.getCost());
+
+        this.damageType = weapon.getDamageType();
+        this.weaponType = weapon.getWeaponType();
+    }
+
     /** ACCESSORS */
     public String getDamageType()
     {
@@ -66,5 +74,6 @@ public abstract class WeaponItem extends GameItem
                 ", Weapon Type = " +weaponType+
                 ", ENCHANTMENTS : ";
     }
+
 }
 
