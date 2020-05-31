@@ -6,7 +6,7 @@ File(s) Required to Compile:
 - resources/item_database.txt
 
 To Compile:
-- change directory to 'combat-game' directory
+- change directory to 'combat-game-master' directory
 - type 'ant' to clean and build the program
 - dist folder should appear
 
