@@ -29,3 +29,21 @@ WARNING: SYSTEM : Something went wrong. Check error.log
 May 31, 2020 8:36:32 PM CombatGame main
 SEVERE: Not enough items to proceed into the game
 
+Jun 01, 2020 12:04:36 AM CombatGame main
+WARNING: SYSTEM : Something went wrong. Check error.log
+
+Jun 01, 2020 12:04:36 AM CombatGame main
+SEVERE: Game must at least have 1 weapon and 1 armour to proceed
+
+Jun 01, 2020 12:13:49 AM CombatGame main
+WARNING: SYSTEM : Something went wrong. Check error.log
+
+Jun 01, 2020 12:13:49 AM CombatGame main
+SEVERE: Game must at least have 1 weapon and 1 armour to proceed
+
+Jun 01, 2020 12:13:54 AM CombatGame main
+WARNING: SYSTEM : Something went wrong. Check error.log
+
+Jun 01, 2020 12:13:54 AM CombatGame main
+SEVERE: Game must at least have 1 weapon and 1 armour to proceed
+

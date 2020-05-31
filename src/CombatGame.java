@@ -45,7 +45,6 @@ public class CombatGame
             final ItemDatabaseManager itemDatabaseManager = new ItemDatabaseManager(itemFactory, itemDatabase);
             itemDatabaseManager.addLoader(textFileDataLoader);
             itemDatabaseManager.constructDatabase();
-            //itemDatabaseManager.populate(DEFAULT_ITEM_DATABASE);
             final EnchantmentDatabase enchantmentDatabase = new EnchantmentDatabase();
             enchantmentDatabase.populateDefault();
 
