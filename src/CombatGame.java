@@ -1,12 +1,12 @@
 import controller.battle.BattleController;
 import controller.factory.*;
 import controller.io.ErrorLogger;
-import controller.io.InvalidItemDataSourceException;
 import controller.io.ItemDatabaseManager;
 import controller.io.TextFileDataLoader;
 import controller.player.CharacterController;
 import controller.shop.ShopController;
 import model.enchantment.EnchantmentDatabase;
+import model.item.InvalidItemDatabaseException;
 import model.item.ItemDatabase;
 import model.item.armour.ArmourItem;
 import model.item.weapon.WeaponItem;
@@ -21,9 +21,6 @@ import java.util.logging.SimpleFormatter;
 
 public class CombatGame
 {
-    //private static final String DEFAULT_ITEM_DATABASE = "./resources/item_database.txt";
-    private static final String DEFAULT_ITEM_DATABASE = "./resources/item_database_bad.txt";
-
     public static void main(String[] args)
     {
         ErrorLogger errorLogger = ErrorLogger.getInstance();
@@ -42,7 +39,6 @@ public class CombatGame
 
             /* Initialise data source */
             final TextFileDataLoader textFileDataLoader = new TextFileDataLoader(itemFactory);
-            final TextFileDataLoader test = new TextFileDataLoader(itemFactory);
 
             /* Initialise databases */
             final ItemDatabase itemDatabase = new ItemDatabase();
@@ -74,14 +70,14 @@ public class CombatGame
             /* Close file handler */
             fileHandler.close();
         }
-        catch (InvalidMenuFactoryException | IOException | IllegalArgumentException e)
+        catch (InvalidMenuFactoryException | IOException | IllegalArgumentException | InvalidItemDatabaseException e)
         {
             // Fatal exceptions - All exceptions caught will be labeled as severe. Further information will be in error.log
             Logger logger = errorLogger.createLogger(CombatGame.class.getName());
             logger.setUseParentHandlers(true);
-            logger.warning("SYSTEM : Something went wrong. Check error.log");
+            logger.warning("SYSTEM : Something went wrong. Check error.log\n");
             logger.setUseParentHandlers(false);
-            logger.severe(e.getMessage());
+            logger.severe(e.getMessage() + "\n");
         }
         finally
         {

@@ -186,23 +186,28 @@ public class CharacterPlayer extends CombatPlayer
      * NOTE - Damage effect as integer is returned as this will allow for potions to deal
      * damage in the same way attacking does. More on this inside implementations of potion class.
      */
-    public int usePotion(PotionItem potion)
+    public int usePotion(PotionItem potion) throws CharacterPlayerException
     {
         for(GameItem item : inventory)
         {
             if(item.getName().equals(potion.getName()))
             {
+                // Notify observers of potion use
                 notifyPotionUseObservers(potion.getName());
 
+                // Returned integer is effect - only damage will be returned
                 int effect;
                 effect = potion.use(this);
 
+                // Remove from list due to consumption
                 inventory.remove(item);
 
                 return effect;
             }
         }
-        return 0;
+
+        // Throw since only will reach this line if a potion is not found
+        throw new CharacterPlayerException("Player does not possess such potion");
     }
 
     /**

@@ -4,6 +4,7 @@ import controller.factory.EnemyFactory;
 import model.item.potion.PotionItem;
 import model.player.CombatPlayer;
 import model.player.character.CharacterPlayer;
+import model.player.character.CharacterPlayerException;
 import model.player.enemy.EnemyPlayer;
 
 /**
@@ -42,15 +43,22 @@ public class BattleController
      *
      * NOTE - potions have been implemented so that defence can also block potion damage
      */
-    public void usePotion(CharacterPlayer character, CombatPlayer player, PotionItem potion)
-    {
-        int damage = character.usePotion(potion);
-
-        // If damage is 0, it is only for healing. If less than 0, invalid
-        if (damage > 0)
+    public void usePotion(CharacterPlayer character, CombatPlayer player, PotionItem potion) throws InvalidBattleActionException {
+        int damage = 0;
+        try
         {
-            player.defend(damage);
+            damage = character.usePotion(potion);
+            // If damage is 0, it is only for healing. If less than 0, invalid
+            if (damage > 0)
+            {
+                player.defend(damage);
+            }
         }
+        catch (CharacterPlayerException e)
+        {
+            throw new InvalidBattleActionException("Cannot complete potion use - " + e.getMessage());
+        }
+
     }
 
     /**

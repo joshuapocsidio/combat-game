@@ -1,6 +1,7 @@
 package view.ui.battle;
 
 import controller.battle.BattleController;
+import controller.battle.InvalidBattleActionException;
 import model.item.potion.PotionItem;
 import model.player.*;
 import model.player.character.CharacterPlayer;
@@ -159,6 +160,19 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         return battleOver;
     }
 
+    /**
+     * Method to define the action to be taken if Use Potion is chosen from prompt
+     * This return false if the character player does not have any potions therefore cannot complete action
+     *
+     * This action implementation is as follows:
+     * - checks if any potions available
+     * - if potion(s) is available, prompt user which potion to use
+     * - validates user input
+     * - if user input is valid, then pass the task to controller
+     *
+     * RETURN
+     * - boolean    : indicates success of action
+     */
     private boolean doPotionAction()
     {
         boolean actionPotionSuccessful = true;
@@ -205,6 +219,10 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
                 catch(NumberFormatException e)
                 {
                     System.out.println("Invalid input - Please try again");
+                }
+                catch (InvalidBattleActionException e)
+                {
+                    System.out.println(e.getMessage() + " - Please try again");
                 }
             }
         }
@@ -291,7 +309,7 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
     /**
      * Method to detach itself from listening for events
      *
-     * This method is called when battle is over
+     * This method is called when battle is over to prevent multiple observers for the next battle(s)
      */
     private void detachObservers()
     {
@@ -343,6 +361,11 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
         }
     }
 
+    /**
+     * Observer Method to notify user of damage being dealt/taken
+     * - shows who took the damage
+     * - shows how much damage was taken
+     */
     @Override
     public void showDamageEvent(CombatPlayer player, int damage)
     {
@@ -366,11 +389,11 @@ public class BattleView extends MenuAction implements AttackObserver, DefendObse
      * - shows output damage before defence calculations (if any)
      */
     @Override
-    public void showPotionUseEvent(CombatPlayer player, String name)
+    public void showPotionUseEvent(CombatPlayer player, String potionName)
     {
         System.out.println();
         System.out.println("-------- BATTLE ANNOUNCER --------");
-        System.out.println(player.getName() + " used " + name + "!!");
+        System.out.println(player.getName() + " used " + potionName + "!!");
     }
 
     /**

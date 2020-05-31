@@ -1,6 +1,5 @@
 package controller.factory;
 
-import controller.io.ErrorLogger;
 import model.item.GameItem;
 import model.item.armour.ArmourItem;
 import model.item.potion.DamagePotion;
@@ -8,8 +7,6 @@ import model.item.potion.HealthPotion;
 import model.item.potion.PotionItem;
 import model.item.weapon.Weapon;
 import model.item.weapon.WeaponItem;
-
-import java.util.logging.Logger;
 
 /**
  * Factory class for creating items.

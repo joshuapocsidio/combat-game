@@ -3,7 +3,6 @@ package controller.io;
 import controller.factory.InvalidItemFactoryException;
 import controller.factory.ItemFactory;
 import model.item.GameItem;
-import model.item.InvalidItemDatabaseException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,11 +13,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Strategy class TextFileDataLoader implementing ItemDatabaseLoader interface
+ * - logs if any warning detected when parsing in items from data source
+ * - contains load() strategy method which returns a list of game items
+ */
 public class TextFileDataLoader implements ItemDatabaseLoader
 {
-    private static final String filename = "./resources/item_database_bad.txt";
+    private static final String filename = "./resources/item_database.txt";
     private final Logger logger = ErrorLogger.getInstance().createLogger(TextFileDataLoader.class.getName());
-    private ItemFactory itemFactory;
+    private final ItemFactory itemFactory;
 
     public TextFileDataLoader(ItemFactory itemFactory)
     {
@@ -107,6 +111,10 @@ public class TextFileDataLoader implements ItemDatabaseLoader
         }
     }
 
+    /**
+     * Method for creating the item based on import parameters
+     * - If item factory exception is caught, simply log to error.log
+     */
     private GameItem createItem(String type, String name, int minEffect, int maxEffect, int cost, String[] attributes)
     {
         GameItem newItem = null;

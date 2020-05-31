@@ -3,6 +3,13 @@ package controller.io;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
+/**
+ * Class ErrorLogger implemented as a Singleton
+ * - Singleton because FileHandler is linked to a particular error.log file
+ * - This is implemented so that it is not required to make filehandlers and loggers to
+ * - communicate with each other in case multiple instances are trying to update
+ * - one single log file simultaneously.
+ */
 public class ErrorLogger
 {
     /* FileHandler that holds formatting and the error.log*/

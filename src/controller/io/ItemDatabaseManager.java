@@ -6,6 +6,8 @@ import model.item.GameItem;
 import model.item.InvalidItemDatabaseException;
 import model.item.ItemDatabase;
 import model.item.ItemDatabaseChangeObserver;
+import model.item.armour.ArmourItem;
+import model.item.weapon.WeaponItem;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,9 +18,14 @@ import java.util.logging.Logger;
  */
 public class ItemDatabaseManager implements ItemDatabaseChangeObserver
 {
+    /** ItemDatabaseManager specific Fields **/
     private final ItemFactory itemFactory;
     private final ItemDatabase itemDatabase;
+
+    /** Logger field */
     private final Logger logger = ErrorLogger.getInstance().createLogger(ItemDatabaseManager.class.getName());
+
+    /** List of ItemDatabaseLoaders */
     private List<ItemDatabaseLoader> loaders = new LinkedList<>();
 
     public ItemDatabaseManager(ItemFactory itemFactory, ItemDatabase itemDatabase)
@@ -42,8 +49,7 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
         loaders.add(loader);
     }
 
-    public void constructDatabase()
-    {
+    public void constructDatabase() throws InvalidItemDatabaseException {
         for(ItemDatabaseLoader loader : loaders)
         {
             try
@@ -67,8 +73,40 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
                 logger.warning("Attempted to add item to database but received error : " +e.getMessage());
             }
         }
+
+        if(itemDatabase.getAllItems().size() < 2)
+        {
+            throw new InvalidItemDatabaseException("Not enough items to proceed into the game");
+        }
+
+        if(this.checkDatabaseRequirements())
+        {
+            throw new InvalidItemDatabaseException("Game must at least have 1 weapon and 1 armour to proceed");
+        }
     }
 
+    /**
+     * Method to check for database requirements for the program to proceed
+     */
+    private boolean checkDatabaseRequirements()
+    {
+        boolean foundWeapon = false;
+        boolean foundArmour = false;
+
+        for(GameItem item : itemDatabase.getAllItems())
+        {
+            if(item instanceof WeaponItem)
+            {
+                foundWeapon = true;
+            }
+            else if(item instanceof ArmourItem)
+            {
+                foundArmour = true;
+            }
+        }
+
+        return foundWeapon && foundArmour;
+    }
     /**
      * Observer method for creating new item based on input parameters for future use
      *

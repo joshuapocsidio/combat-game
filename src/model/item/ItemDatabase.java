@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class ItemDatabase
 {
-    /** Character Player specific Fields **/
-    private List<GameItem> itemList;
+    /** ItemDatabase specific Fields **/
+    private final List<GameItem> itemList;
     private int itemCount;
 
     /**
