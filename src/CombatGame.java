@@ -74,7 +74,7 @@ public class CombatGame
             // Fatal exceptions - All exceptions caught will be labeled as severe. Further information will be in error.log
             Logger logger = errorLogger.createLogger(CombatGame.class.getName());
             logger.setUseParentHandlers(true);
-            logger.warning("SYSTEM : Something went wrong. Check error.log\n");
+            logger.warning("SYSTEM : Something went wrong. Check error.log\n" +e.getMessage());
             logger.setUseParentHandlers(false);
             logger.severe(e.getMessage() + "\n");
         }

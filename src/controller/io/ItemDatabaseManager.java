@@ -79,7 +79,7 @@ public class ItemDatabaseManager implements ItemDatabaseChangeObserver
             throw new InvalidItemDatabaseException("Not enough items to proceed into the game");
         }
 
-        if(this.checkDatabaseRequirements())
+        if(!this.checkDatabaseRequirements())
         {
             throw new InvalidItemDatabaseException("Game must at least have 1 weapon and 1 armour to proceed");
         }
