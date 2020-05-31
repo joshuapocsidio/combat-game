@@ -1,0 +1,2 @@
+W, Short Sword, 5, 9, 10, slashing, Sword
+W, Great Axe, 12, 11, 15, slashing, Axe
