@@ -46,13 +46,23 @@ public abstract class CombatPlayer
      * - Sets up CombatPlayer with relevant fields
      * - Sets up all relevant observers/Observers
      * **/
-    public CombatPlayer(String inName, int inMaxHealth, double inGold)
+    public CombatPlayer(String name, int maxHealth, double gold)
     {
-        name = inName;
-        maxHealth = inMaxHealth;
-        gold = inGold;
+        if(gold < 0)
+        {
+            throw new IllegalArgumentException("Gold cannot be negative");
+        }
 
-        currentHealth = maxHealth;
+        if(maxHealth <= 0)
+        {
+            throw new IllegalArgumentException("Max Health cannot be 0 or negative");
+        }
+
+        this.name = name;
+        this.maxHealth = maxHealth;
+        this.gold = gold;
+
+        currentHealth = this.maxHealth;
 
         attackObservers = new LinkedList<>();
         defendObservers = new LinkedList<>();

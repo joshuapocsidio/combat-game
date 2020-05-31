@@ -37,7 +37,8 @@ public class BattleController
     }
 
     /**
-     * Method that allows use of potion between character player and another player.
+     * Method that allows use of potion between character player and another player
+     * - Exception is not checked
      *
      * NOTE - potions have been implemented so that defence can also block potion damage
      */

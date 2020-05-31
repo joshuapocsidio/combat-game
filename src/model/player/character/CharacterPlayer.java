@@ -207,6 +207,7 @@ public class CharacterPlayer extends CombatPlayer
 
     /**
      * Method for checking if item exists in inventory
+     * - Uses isIdentical()
      */
     public boolean hasItem(GameItem item)
     {
@@ -214,7 +215,7 @@ public class CharacterPlayer extends CombatPlayer
 
         for(GameItem checkItem : inventory)
         {
-            if(checkItem.equals(item))
+            if(checkItem.isIdentical(item))
             {
                 has =  true;
             }
@@ -247,15 +248,20 @@ public class CharacterPlayer extends CombatPlayer
 
     public GameItem getItem(GameItem item) throws CharacterPlayerException
     {
-        if(inventory.contains(item))
-        {
-            // Only get item if inventory contains this item
-            return inventory.get(inventory.indexOf(item));
-        }
-        else
+        if(!inventory.contains(item))
         {
             throw new CharacterPlayerException("Item does not exist in inventory");
         }
+
+        for(GameItem checkItem : inventory)
+        {
+            if(checkItem.isIdentical(item))
+            {
+                return checkItem;
+            }
+        }
+
+        return null;
     }
 
     public List<GameItem> getInventory()
@@ -315,7 +321,6 @@ public class CharacterPlayer extends CombatPlayer
         {
             if(checkItem.equals(item))
             {
-                System.out.println("FOUND DUP");
                 numDuplicate++;
             }
         }
@@ -409,7 +414,7 @@ public class CharacterPlayer extends CombatPlayer
         int i = 0;
         while(!found && i < inventory.size())
         {
-            if(weapon.equals(inventory.get(i)))
+            if(weapon.isIdentical(inventory.get(i)))
             {
                 found = true;
                 this.equippedWeapon = weapon;
@@ -442,7 +447,7 @@ public class CharacterPlayer extends CombatPlayer
         int i = 0;
         while(!found && i < inventory.size())
         {
-            if(armour.equals(inventory.get(i)))
+            if(armour.isIdentical(inventory.get(i)))
             {
                 found = true;
                 this.equippedArmour = armour;

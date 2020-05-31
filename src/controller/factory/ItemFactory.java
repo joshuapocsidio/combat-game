@@ -18,7 +18,6 @@ import java.util.logging.Logger;
  */
 public class ItemFactory
 {
-    private final Logger logger = ErrorLogger.getInstance().createLogger(ItemFactory.class.getName());
     /**
      * Creates items based on input parameters
      * - Calls different weapon creation based on input type
@@ -57,7 +56,8 @@ public class ItemFactory
         {
             errorMsg += "\n - Item type must not be null";
         }
-        else
+
+        if(errorMsg.equals(""))
         {
             // Create item
             GameItem item;

@@ -3,6 +3,7 @@ import controller.factory.*;
 import controller.io.ErrorLogger;
 import controller.io.InvalidItemDataSourceException;
 import controller.io.ItemDatabaseManager;
+import controller.io.TextFileDataLoader;
 import controller.player.CharacterController;
 import controller.shop.ShopController;
 import model.enchantment.EnchantmentDatabase;
@@ -39,10 +40,16 @@ public class CombatGame
             final EnchantmentFactory enchantmentFactory = new EnchantmentFactory();
             final EnemyFactory enemyFactory = new EnemyFactory();
 
+            /* Initialise data source */
+            final TextFileDataLoader textFileDataLoader = new TextFileDataLoader(itemFactory);
+            final TextFileDataLoader test = new TextFileDataLoader(itemFactory);
+
             /* Initialise databases */
             final ItemDatabase itemDatabase = new ItemDatabase();
             final ItemDatabaseManager itemDatabaseManager = new ItemDatabaseManager(itemFactory, itemDatabase);
-            itemDatabaseManager.populate(DEFAULT_ITEM_DATABASE);
+            itemDatabaseManager.addLoader(textFileDataLoader);
+            itemDatabaseManager.constructDatabase();
+            //itemDatabaseManager.populate(DEFAULT_ITEM_DATABASE);
             final EnchantmentDatabase enchantmentDatabase = new EnchantmentDatabase();
             enchantmentDatabase.populateDefault();
 
@@ -67,7 +74,7 @@ public class CombatGame
             /* Close file handler */
             fileHandler.close();
         }
-        catch (InvalidItemDataSourceException | InvalidMenuFactoryException | IOException | IllegalArgumentException e)
+        catch (InvalidMenuFactoryException | IOException | IllegalArgumentException e)
         {
             // Fatal exceptions - All exceptions caught will be labeled as severe. Further information will be in error.log
             Logger logger = errorLogger.createLogger(CombatGame.class.getName());
