@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class TextFileDataLoader implements ItemDatabaseLoader
 {
-    private static final String filename = "./resources/item_database.txt";
+    private static final String filename = "./item_database.txt";
     private final Logger logger = ErrorLogger.getInstance().createLogger(TextFileDataLoader.class.getName());
     private final ItemFactory itemFactory;
 
