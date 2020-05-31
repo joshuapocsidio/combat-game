@@ -26,6 +26,9 @@ public class UserInterface
     private String footer;
     private String prompt;
 
+    /* The pattern of string that will be used for dividers */
+    private String dividerString;
+
     public static class Builder
     {
         private final UserInterface ui;
@@ -46,6 +49,9 @@ public class UserInterface
             ui.body = "";
             ui.footer = "";
             ui.prompt = "";
+
+            // Default even if not set manually
+            ui.dividerString = "~";
         }
 
         /** Adds a pre heading */
@@ -93,6 +99,13 @@ public class UserInterface
         public Builder withPrompt(String prompt)
         {
             ui.prompt = prompt;
+            return this;
+        }
+
+        /** Sets the divider string pattern */
+        public Builder setDividerString(String dividerString)
+        {
+            ui.dividerString = dividerString;
             return this;
         }
 
